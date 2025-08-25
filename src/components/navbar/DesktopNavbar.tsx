@@ -1,11 +1,36 @@
 import { Link, NavLink } from "react-router-dom";
 import { ShoppingBag, UserRoundPen } from "lucide-react";
-// import { gsap } from "gsap";
-// import { useGSAP } from "@gsap/react";
+import { gsap } from "gsap";
 import { useRef } from "react";
 
 export default function DesktopNavbar() {
-  const catRef = useRef(null);
+  const catRef = useRef<HTMLUListElement | null>(null);
+
+  const showCats = () => {
+    if (!catRef.current) return;
+    gsap.killTweensOf(catRef.current);
+    gsap.fromTo(
+      catRef.current,
+      { display: "flex", scaleY: 0 },
+      { scaleY: 1, duration: 0.5 }
+    );
+  };
+
+  const hideCats = () => {
+    if (!catRef.current) return;
+    gsap.killTweensOf(catRef.current);
+    gsap.fromTo(
+      catRef.current,
+      { scaleY: 1 },
+      {
+        scaleY: 0,
+        duration: 0.5,
+        onComplete: () => {
+          if (catRef.current) catRef.current.style.display = "none";
+        },
+      }
+    );
+  };
 
   return (
     <div className="hidden lg:flex flex-col">
@@ -64,12 +89,18 @@ export default function DesktopNavbar() {
         </div>
       </div>
       <div
-        className="group flex flex-col items-center justify-center cursor-pointer"
+        className="group w-fit m-auto flex flex-col items-center justify-center cursor-pointer hover:w-full"
         role="listitem"
+        onMouseLeave={hideCats}
       >
-        <p className="hover:w-full text-center pb-4 peer">Category</p>
+        <h3
+          className="group-hover:text-green-600 hover:w-full text-center pb-4"
+          onMouseEnter={showCats}
+        >
+          Category
+        </h3>
         <ul
-          className="hidden border-t-1 hover:flex peer-hover:flex flex-col w-full gap-4 items-center pt-4"
+          className="hidden flex-col w-full gap-4 items-center pt-4 origin-top"
           ref={catRef}
         >
           <li>Shoes</li>
