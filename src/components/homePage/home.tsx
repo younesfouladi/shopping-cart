@@ -34,7 +34,10 @@ export default function HomePage({ products }: IHomePage) {
           Cheapest Products<button className="text-green-700">see all</button>
         </h1>
 
-        <div id="cheapest-product" className="grid grid-cols-2 gap-4">
+        <div
+          id="cheapest-product"
+          className="grid grid-cols-2 gap-4 lg:grid-cols-3 2xl:grid-cols-4"
+        >
           {cheapest.slice(0, 4).map((item) => (
             <ProductCard key={item.id} product={item} />
           ))}
@@ -44,10 +47,29 @@ export default function HomePage({ products }: IHomePage) {
         <h1 className="font-bold flex justify-between">
           Trending Products<button className="text-green-700">see all</button>
         </h1>
-        <div id="cheapest-product" className="grid grid-cols-2 gap-4">
+        <div
+          id="cheapest-product"
+          className="grid grid-cols-2 gap-4 lg:grid-cols-3 2xl:grid-cols-4"
+        >
           {trending.slice(0, 4).map((item) => (
             <ProductCard key={item.id} product={item} />
           ))}
+        </div>
+      </section>
+      <section className="space-y-2 mb-4">
+        <h1 className="font-bold flex justify-between">
+          Women Clothing<button className="text-green-700">see all</button>
+        </h1>
+        <div
+          id="cheapest-product"
+          className="grid grid-cols-2 gap-4 lg:grid-cols-3 2xl:grid-cols-4"
+        >
+          {products
+            .filter((item) => item.category.includes("women's clothing"))
+            .slice(0, 4)
+            .map((item) => (
+              <ProductCard key={item.id} product={item} />
+            ))}
         </div>
       </section>
     </div>

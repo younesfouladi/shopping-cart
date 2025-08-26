@@ -18,6 +18,7 @@ interface IProduct {
 
 export default function App() {
   const [products, setProducts] = useState<IProduct[]>([]);
+
   useEffect(() => {
     (async () => {
       const url = "https://fakestoreapi.com/products";
@@ -30,7 +31,7 @@ export default function App() {
       }
     })();
   }, []);
-
+  console.log(products);
   return (
     <div id="container" className="p-4 font-main">
       <Navbar />
