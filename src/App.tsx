@@ -10,7 +10,10 @@ interface IProduct {
   category: string;
   image: string;
   price: string;
-  rating: object;
+  rating: {
+    rate: number;
+    count: number;
+  };
 }
 
 export default function App() {

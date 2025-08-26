@@ -10,8 +10,11 @@ interface IProduct {
   description: string;
   category: string;
   image: string;
-  price: string;
-  rating: object[];
+  price: number;
+  rating: {
+    rate: number;
+    count: number;
+  };
 }
 
 export default function HomePage({ products }: IHomePage) {
@@ -24,7 +27,7 @@ export default function HomePage({ products }: IHomePage) {
     .sort((a, b) => b.rating.rate - a.rating.rate);
 
   return (
-    <div id="home-container">
+    <div id="home-container" className="pb-20">
       <section className="space-y-2">
         <h1 className="font-bold">Cheapest Products</h1>
         <div id="cheapest-product" className="grid grid-cols-2 gap-4">
