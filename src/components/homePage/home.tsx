@@ -1,4 +1,5 @@
 import { Star } from "lucide-react";
+import { LoadingSpinner } from "../Utilities";
 
 interface IHomePage {
   products: IProduct[];
@@ -19,7 +20,7 @@ interface IProduct {
 
 export default function HomePage({ products }: IHomePage) {
   if (products.length === 0) {
-    return <h1>Loading...</h1>;
+    return <LoadingSpinner />;
   }
   const cheapest = [...products].sort((a, b) => a.price - b.price);
   const trending = products
