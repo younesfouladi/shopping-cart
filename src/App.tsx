@@ -9,7 +9,7 @@ interface IProduct {
   description: string;
   category: string;
   image: string;
-  price: string;
+  price: number;
   rating: {
     rate: number;
     count: number;
