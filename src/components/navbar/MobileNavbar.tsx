@@ -6,18 +6,16 @@ import {
   Store,
   UserRoundPen,
   PackageSearch,
+  X,
 } from "lucide-react";
+import React, { useState, useEffect, useRef } from "react";
+import { gsap } from "gsap";
 
 export default function MobileNavbar() {
   return (
     <div className="flex justify-between lg:hidden">
       <div>
-        <Menu />
-        <ul className="hidden">
-          <li>Shoes</li>
-          <li>Clothes</li>
-          <li>Shirts</li>
-        </ul>
+        <FlyoutMenu icon={<Menu />} links={["Shoes", "Clothes", "Shirts"]} />
       </div>
       <h1 className="font-logo text-2xl">
         <span className="text-green-600">Y</span>O
@@ -66,3 +64,61 @@ export default function MobileNavbar() {
     </div>
   );
 }
+
+interface IFlyoutMent {
+  icon: React.ReactNode;
+  links: string[];
+}
+
+const FlyoutMenu = ({ icon, links }: IFlyoutMent) => {
+  const catRef = useRef<HTMLUListElement | null>(null);
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (open) {
+      if (!catRef.current) return;
+      gsap.killTweensOf(catRef.current);
+      gsap.fromTo(
+        catRef.current,
+        { display: "flex", scaleX: 0 },
+        { scaleX: 1, duration: 0.5 }
+      );
+    } else {
+      if (!catRef.current) return;
+      gsap.killTweensOf(catRef.current);
+      gsap.fromTo(
+        catRef.current,
+        { scaleX: 1 },
+        {
+          scaleX: 0,
+          duration: 0.5,
+          onComplete: () => {
+            if (catRef.current) catRef.current.style.display = "none";
+          },
+        }
+      );
+    }
+  }, [open]);
+
+  return (
+    <>
+      <button
+        className="group-hover:text-green-600 hover:w-full text-center pb-4 px-4 "
+        onClick={() => setOpen(!open)}
+      >
+        {icon}
+      </button>
+      <ul
+        className="hidden fixed left-0 top-0 h-full w-2/3 flex-col gap-4 items-center justify-center z-10 p-4 origin-left bg-green-600 text-neutral-50"
+        ref={catRef}
+      >
+        <X className="absolute top-4 right-4" onClick={() => setOpen(!open)} />
+        {links.map((item) => (
+          <li key={item}>
+            <NavLink to={" "}>{item}</NavLink>
+          </li>
+        ))}
+      </ul>
+    </>
+  );
+};
