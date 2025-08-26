@@ -76,6 +76,11 @@ const FlyoutMenu = ({ icon, links }: IFlyoutMent) => {
 
   useEffect(() => {
     if (open) {
+      window.addEventListener("click", (e) => {
+        if (e.target !== catRef.current) {
+          setOpen(false);
+        }
+      });
       if (!catRef.current) return;
       gsap.killTweensOf(catRef.current);
       gsap.fromTo(
@@ -103,8 +108,11 @@ const FlyoutMenu = ({ icon, links }: IFlyoutMent) => {
   return (
     <>
       <button
-        className="group-hover:text-green-600 hover:w-full text-center pb-4 px-4 "
-        onClick={() => setOpen(!open)}
+        className="group-hover:text-green-600 hover:w-full text-center"
+        onClick={(e) => {
+          setOpen(!open);
+          e.stopPropagation();
+        }}
       >
         {icon}
       </button>
