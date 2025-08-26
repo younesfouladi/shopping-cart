@@ -1,12 +1,36 @@
 import "./styles/App.css";
 import Navbar from "./components/navbar/navbar";
+import HomePage from "./components/homePage/home";
+import { useEffect, useState } from "react";
 
-function App() {
+interface IProduct {
+  id: number;
+  title: string;
+  description: string;
+  category: string;
+  image: string;
+  price: string;
+}
+
+export default function App() {
+  const [products, setProducts] = useState<IProduct[]>([]);
+  useEffect(() => {
+    (async () => {
+      const url = "https://fakestoreapi.com/products";
+      try {
+        const response = await fetch(url);
+        const result = await response.json();
+        setProducts(result);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, []);
+
   return (
-    <div className="p-4 ">
+    <div id="container" className="p-4 font-main">
       <Navbar />
+      <HomePage products={products} />
     </div>
   );
 }
-
-export default App;
