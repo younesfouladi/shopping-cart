@@ -27,55 +27,52 @@ export default function HomePage({ products }: IHomePage) {
     .sort((a, b) => b.rating.rate - a.rating.rate);
 
   return (
-    <div id="home-container" className="pb-20">
-      <section className="space-y-2">
-        <h1 className="font-bold">Cheapest Products</h1>
+    <div id="home-container" className="pb-14">
+      <section className="space-y-2 mb-4">
+        <h1 className="font-bold flex justify-between">
+          Cheapest Products<button className="text-green-700">see all</button>
+        </h1>
+
         <div id="cheapest-product" className="grid grid-cols-2 gap-4">
           {cheapest.slice(0, 4).map((item) => (
-            <div key={item.id} className="flex flex-col gap-2">
-              <img
-                src={item.image}
-                alt="product's image"
-                className="p-4 bg-neutral-200 rounded-2xl w-fit aspect-square object-contain"
-              />
-              <p
-                title={item.title}
-                className="whitespace-nowrap overflow-ellipsis overflow-hidden"
-              >
-                {item.title}
-              </p>
-              <p className="font-bold">${item.price}</p>
-            </div>
+            <ProductCard key={item.id} product={item} />
           ))}
         </div>
       </section>
-      <section className="space-y-2">
-        <h1 className="font-bold">Trending Products</h1>
+      <section className="space-y-2 mb-4">
+        <h1 className="font-bold flex justify-between">
+          Trending Products<button className="text-green-700">see all</button>
+        </h1>
         <div id="cheapest-product" className="grid grid-cols-2 gap-4">
           {trending.slice(0, 4).map((item) => (
-            <div key={item.id} className="flex flex-col gap-2">
-              <img
-                src={item.image}
-                alt="product's image"
-                className="p-4 bg-neutral-200 rounded-2xl w-fit aspect-square object-contain"
-              />
-              <p
-                title={item.title}
-                className="whitespace-nowrap overflow-ellipsis overflow-hidden"
-              >
-                {item.title}
-              </p>
-              <div className="flex justify-between">
-                <p className="font-bold">${item.price}</p>
-                <span className="flex gap-1">
-                  <Star size={18} className="text-amber-600" />{" "}
-                  {item.rating.rate}
-                </span>
-              </div>
-            </div>
+            <ProductCard key={item.id} product={item} />
           ))}
         </div>
       </section>
+    </div>
+  );
+}
+
+function ProductCard({ product }: { product: IProduct }) {
+  return (
+    <div className="flex flex-col gap-2">
+      <img
+        src={product.image}
+        alt="product's image"
+        className="p-4 bg-neutral-200 rounded-2xl w-fit aspect-square object-contain"
+      />
+      <p
+        title={product.title}
+        className="whitespace-nowrap overflow-ellipsis overflow-hidden"
+      >
+        {product.title}
+      </p>
+      <div className="flex justify-between">
+        <p className="font-bold">${product.price}</p>
+        <span className="flex gap-1">
+          <Star size={18} className="text-amber-600" /> {product.rating.rate}
+        </span>
+      </div>
     </div>
   );
 }
