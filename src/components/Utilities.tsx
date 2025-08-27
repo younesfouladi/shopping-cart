@@ -23,7 +23,10 @@ export function ImageSlider({ imageUrls }: { imageUrls: string[] }) {
     };
   }, [imageUrls.length]);
   return (
-    <div id="home-banner" className="mb-4 w-full overflow-hidden">
+    <div
+      id="home-banner"
+      className="mb-4 w-full overflow-hidden rounded-xl lg:w-2/3 mx-auto"
+    >
       <div
         id="slider-container"
         className={translateX + " w-full relative flex transition-all"}

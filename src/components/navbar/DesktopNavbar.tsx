@@ -125,7 +125,7 @@ const FlyoutMenu = ({ title, links }: IFlyoutMent) => {
         {title}
       </a>
       <ul
-        className="hidden absolute top-full left-1 flex-col gap-4 items-center p-4 origin-top bg-green-600 text-neutral-50 rounded-xl"
+        className="hidden absolute top-full left-1 flex-col gap-4 items-center p-4 origin-top bg-green-600 text-neutral-50 rounded-xl z-10"
         ref={catRef}
       >
         <span className="absolute w-4 h-4 bg-green-600 rotate-45 -top-2"></span>
