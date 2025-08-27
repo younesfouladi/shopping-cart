@@ -38,9 +38,9 @@ export default function App() {
     })();
   }, []);
   return (
-    <div id="container" className="p-4 font-main">
+    <main id="container" className="p-4 font-main">
       <Navbar />
       <Outlet context={[products, wishList, setWishList]} />
-    </div>
+    </main>
   );
 }
