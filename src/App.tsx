@@ -31,7 +31,6 @@ export default function App() {
       }
     })();
   }, []);
-  console.log(products);
   return (
     <div id="container" className="p-4 font-main">
       <Navbar />

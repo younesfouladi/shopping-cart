@@ -1,5 +1,4 @@
-import { Star } from "lucide-react";
-import { LoadingSpinner } from "../Utilities";
+import { ImageSlider, LoadingSpinner } from "../Utilities";
 
 interface IHomePage {
   products: IProduct[];
@@ -29,11 +28,19 @@ export default function HomePage({ products }: IHomePage) {
 
   return (
     <div id="home-container" className="pb-14">
+      <ImageSlider
+        imageUrls={[
+          "/images/banners/banner-1.webp",
+          "/images/banners/banner-2.webp",
+          "/images/banners/banner-3.webp",
+          "/images/banners/banner-4.webp",
+          "/images/banners/banner-5.webp",
+        ]}
+      />
       <section className="space-y-2 mb-4">
         <h1 className="font-bold flex justify-between">
           Cheapest Products<button className="text-green-700">see all</button>
         </h1>
-
         <div
           id="cheapest-product"
           className="grid grid-cols-2 gap-4 lg:grid-cols-3 2xl:grid-cols-4"
