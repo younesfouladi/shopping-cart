@@ -1,6 +1,7 @@
 import App from "../App";
 import ExplorePage from "../components/explorePage/explore";
 import HomePage from "../components/homePage/home";
+import WishList from "../components/wishList/wishList";
 
 const routes = [
   {
@@ -9,6 +10,7 @@ const routes = [
     children: [
       { path: "explore", element: <ExplorePage /> },
       { index: true, element: <HomePage /> },
+      { path: "wishList", element: <WishList /> },
     ],
   },
 ];

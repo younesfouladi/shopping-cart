@@ -91,7 +91,7 @@ export function ProductCard({
 
 export function ImageSlider({ imageUrls }: { imageUrls: string[] }) {
   const [count, setCount] = useState(0);
-  const translateX = `-translate-x-${count}/1`;
+  
   useEffect(() => {
     const timer = setInterval(() => {
       setCount((prev) => {
@@ -102,6 +102,7 @@ export function ImageSlider({ imageUrls }: { imageUrls: string[] }) {
       clearInterval(timer);
     };
   }, [imageUrls.length]);
+  
   return (
     <div
       id="home-banner"
@@ -109,7 +110,8 @@ export function ImageSlider({ imageUrls }: { imageUrls: string[] }) {
     >
       <div
         id="slider-container"
-        className={translateX + " w-full relative flex transition-all"}
+        className="w-full relative flex transition-transform duration-500 ease-in-out"
+        style={{ transform: `translateX(-${count * 100}%)` }}
       >
         {imageUrls.map((image, index) => (
           <img
