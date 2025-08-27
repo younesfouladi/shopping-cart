@@ -1,23 +1,11 @@
+import { useOutletContext } from "react-router-dom";
 import { ImageSlider, LoadingSpinner } from "../Utilities";
+import { ProductCard } from "../Utilities";
+import type { IProductContext } from "../../App";
 
-interface IHomePage {
-  products: IProduct[];
-}
+export default function HomePage() {
+  const [products] = useOutletContext<IProductContext>();
 
-interface IProduct {
-  id: number;
-  title: string;
-  description: string;
-  category: string;
-  image: string;
-  price: number;
-  rating: {
-    rate: number;
-    count: number;
-  };
-}
-
-export default function HomePage({ products }: IHomePage) {
   if (products.length === 0) {
     return <LoadingSpinner />;
   }
@@ -79,30 +67,6 @@ export default function HomePage({ products }: IHomePage) {
             ))}
         </div>
       </section>
-    </div>
-  );
-}
-
-function ProductCard({ product }: { product: IProduct }) {
-  return (
-    <div className="flex flex-col gap-2 bg-neutral-100 border-1 border-neutral-200 rounded-2xl p-4">
-      <img
-        src={product.image}
-        alt="product's image"
-        className="p-4 w-fit aspect-square object-contain"
-      />
-      <p
-        title={product.title}
-        className="whitespace-nowrap overflow-ellipsis overflow-hidden"
-      >
-        {product.title}
-      </p>
-      <div className="flex items-center justify-between">
-        <p className="font-bold">${product.price}</p>
-        <button className="gap-1 bg-green-700 text-neutral-50 px-4 py-1 rounded-lg">
-          Add
-        </button>
-      </div>
     </div>
   );
 }

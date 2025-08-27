@@ -1,10 +1,47 @@
 import { Spinner } from "flowbite-react";
 import { useEffect, useState } from "react";
 
+interface IProduct {
+  id: number;
+  title: string;
+  description: string;
+  category: string;
+  image: string;
+  price: number;
+  rating: {
+    rate: number;
+    count: number;
+  };
+}
+
 export function LoadingSpinner() {
   return (
     <div className="fixed flex flex-col inset-0 bg-neutral-50 items-center justify-center">
       <Spinner aria-label="Loading Spinner" />
+    </div>
+  );
+}
+
+export function ProductCard({ product }: { product: IProduct }) {
+  return (
+    <div className="flex flex-col gap-2 bg-neutral-100 border-1 border-neutral-200 rounded-2xl p-4">
+      <img
+        src={product.image}
+        alt="product's image"
+        className="p-4 w-fit aspect-square object-contain"
+      />
+      <p
+        title={product.title}
+        className="whitespace-nowrap overflow-ellipsis overflow-hidden"
+      >
+        {product.title}
+      </p>
+      <div className="flex items-center justify-between">
+        <p className="font-bold">${product.price}</p>
+        <button className="gap-1 bg-green-700 text-neutral-50 px-4 py-1 rounded-lg">
+          Add
+        </button>
+      </div>
     </div>
   );
 }

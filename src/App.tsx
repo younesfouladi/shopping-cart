@@ -1,9 +1,9 @@
 import "./styles/App.css";
 import Navbar from "./components/navbar/navbar";
-import HomePage from "./components/homePage/home";
 import { useEffect, useState } from "react";
+import { Outlet } from "react-router-dom";
 
-interface IProduct {
+export interface IProduct {
   id: number;
   title: string;
   description: string;
@@ -16,6 +16,8 @@ interface IProduct {
   };
 }
 
+export type IProductContext = [IProduct[]];
+
 export default function App() {
   const [products, setProducts] = useState<IProduct[]>([]);
 
@@ -27,14 +29,14 @@ export default function App() {
         const result = await response.json();
         setProducts(result);
       } catch (error) {
-        console.log(error);
+        throw new Error(`Error : ${error}`);
       }
     })();
   }, []);
   return (
     <div id="container" className="p-4 font-main">
       <Navbar />
-      <HomePage products={products} />
+      <Outlet context={[products]} />
     </div>
   );
 }
