@@ -16,11 +16,15 @@ export interface IProduct {
   };
 }
 
-export type IProductContext = [IProduct[]];
+export type IProductContext = [
+  IProduct[],
+  IProduct[],
+  React.Dispatch<React.SetStateAction<IProduct[]>>
+];
 
 export default function App() {
   const [products, setProducts] = useState<IProduct[]>([]);
-
+  const [wishList, setWishList] = useState<IProduct[]>([]);
   useEffect(() => {
     (async () => {
       const url = "https://fakestoreapi.com/products";
@@ -36,7 +40,7 @@ export default function App() {
   return (
     <div id="container" className="p-4 font-main">
       <Navbar />
-      <Outlet context={[products]} />
+      <Outlet context={[products, wishList, setWishList]} />
     </div>
   );
 }

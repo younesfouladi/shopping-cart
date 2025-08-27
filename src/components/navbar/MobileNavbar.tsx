@@ -23,7 +23,7 @@ export default function MobileNavbar() {
           <span className="text-green-600">Y</span>O
           <span className="text-green-600">F</span>I
         </h1>
-        <ul className="fixed flex gap-8 bottom-4 left-1/2 -translate-x-1/2 bg-neutral-900 rounded-full py-4 px-8 text-neutral-400">
+        <ul className="z-10 fixed flex gap-8 bottom-4 left-1/2 -translate-x-1/2 bg-neutral-900 rounded-full py-4 px-8 text-neutral-400">
           <li>
             <NavLink
               to={"/"}

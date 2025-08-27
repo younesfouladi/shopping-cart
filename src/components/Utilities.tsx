@@ -1,18 +1,6 @@
 import { Spinner } from "flowbite-react";
 import { useEffect, useState } from "react";
-
-interface IProduct {
-  id: number;
-  title: string;
-  description: string;
-  category: string;
-  image: string;
-  price: number;
-  rating: {
-    rate: number;
-    count: number;
-  };
-}
+import type { IProduct } from "../App";
 
 export function LoadingSpinner() {
   return (
@@ -22,9 +10,64 @@ export function LoadingSpinner() {
   );
 }
 
-export function ProductCard({ product }: { product: IProduct }) {
+export function ProductCard({
+  product,
+  wishList,
+  setWishList,
+}: {
+  product: IProduct;
+  wishList: IProduct[];
+  setWishList: React.Dispatch<React.SetStateAction<IProduct[]>>;
+}) {
+  const isFavorite = wishList?.some((item) => item.id === product.id) || false;
+  const toggleFavorite = () => {
+    setWishList((prev) => {
+      if (isFavorite) {
+        return prev.filter((item) => item.id !== product.id);
+      } else {
+        return [...prev, product];
+      }
+    });
+  };
+
   return (
-    <div className="flex flex-col gap-2 bg-neutral-100 border-1 border-neutral-200 rounded-2xl p-4">
+    <div className="relative flex flex-col gap-2 bg-neutral-100 border-1 border-neutral-200 rounded-2xl p-4">
+      <button
+        onClick={toggleFavorite}
+        className="absolute cursor-pointer top-3 right-3 bg-neutral-200 rounded-full p-1 flex"
+      >
+        {isFavorite ? (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="red"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="none"
+            className="size-5"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
+            />
+          </svg>
+        ) : (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="currentColor"
+            className="size-5"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
+            />
+          </svg>
+        )}
+      </button>
       <img
         src={product.image}
         alt="product's image"
