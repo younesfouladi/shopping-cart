@@ -17,11 +17,11 @@ const routes = [
       { path: "explore", element: <ExplorePage /> },
       { index: true, element: <HomePage /> },
       { path: "wishList", element: <WishList /> },
+      {
+        path: "product/:productId",
+        element: <PorductDetails />,
+      },
     ],
-  },
-  {
-    path: "/product/:productId",
-    element: <PorductDetails />,
   },
 ];
 
