@@ -2,8 +2,9 @@ import { Link } from "react-router-dom";
 import { ChevronLeft, EllipsisVertical } from "lucide-react";
 import { useParams } from "react-router-dom";
 import { useProductContext } from "../../hooks/useProductContext";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useLayoutEffect } from "react";
 import type { IProduct } from "../../types/product";
+import gsap from "gsap";
 
 export default function PorductDetails() {
   const productRef = useRef(null);
@@ -12,6 +13,19 @@ export default function PorductDetails() {
   const [selectedProduct, setSelectedProduct] = useState<IProduct | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  useLayoutEffect(() => {
+    if (!productRef.current || loading) return;
+    gsap.fromTo(productRef.current, { scale: 0 }, { scale: 1, duration: 0.5 });
+  }, [loading]);
+
+  const handleBack = () => {
+    gsap.fromTo(
+      productRef.current,
+      { scale: 1, opacity: 1 },
+      { scale: 0, opacity: 0, duration: 0.5, onComplete: () => history.back() }
+    );
+  };
 
   useEffect(() => {
     const findProduct = () => {
@@ -98,12 +112,12 @@ export default function PorductDetails() {
   return (
     <div
       id="product-card"
-      className="fixed w-full h-full z-20 inset-0 bg-neutral-50 p-2 flex flex-col overflow-auto"
+      className="fixed w-full h-full z-20 inset-0 bg-neutral-50 p-2 flex flex-col overflow-auto "
       ref={productRef}
     >
       <div className="flex flex-col gap-8 px-4 py-8 bg-neutral-200 rounded-4xl items-center">
         <div id="product-card-nav" className="w-full flex justify-between">
-          <Link to="#" onClick={() => history.back()}>
+          <Link to="#" onClick={handleBack}>
             <ChevronLeft />
           </Link>
           <h1>Product Details</h1>
@@ -120,7 +134,7 @@ export default function PorductDetails() {
         </div>
       </div>
       <div className="px-4 py-6 flex flex-col gap-4 border-b-1 border-neutral-300">
-        <div className="grid grid-cols-[1fr_min-content]">
+        <div className="grid grid-cols-[1fr_min-content] gap-2">
           <h3 title={selectedProduct.title} className="text-lg">
             {selectedProduct.title}
           </h3>
