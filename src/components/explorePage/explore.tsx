@@ -1,10 +1,9 @@
-import { useOutletContext } from "react-router-dom";
 import { ProductCard } from "../Utilities";
-import type { IProductContext } from "../../App";
 import { LoadingSpinner } from "../Utilities";
+import { useProductContext } from "../../hooks/useProductContext";
 
 export default function ExplorePage() {
-  const [products, wishList, setWishList] = useOutletContext<IProductContext>();
+  const { products, wishList, setWishList } = useProductContext();
 
   if (products.length === 0) {
     return <LoadingSpinner />;

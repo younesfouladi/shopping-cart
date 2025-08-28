@@ -1,6 +1,7 @@
 import { Spinner } from "flowbite-react";
 import { useEffect, useState } from "react";
-import type { IProduct } from "../App";
+import type { IProduct } from "../types/product";
+import { Link } from "react-router-dom";
 
 export function LoadingSpinner() {
   return (
@@ -68,11 +69,13 @@ export function ProductCard({
           </svg>
         )}
       </button>
-      <img
-        src={product.image}
-        alt="product's image"
-        className="p-4 w-fit aspect-square object-contain"
-      />
+      <Link to={`/product/${product.id}`}>
+        <img
+          src={product.image}
+          alt="product's image"
+          className="p-4 w-fit aspect-square object-contain"
+        />
+      </Link>
       <p
         title={product.title}
         className="whitespace-nowrap overflow-ellipsis overflow-hidden"
@@ -91,7 +94,7 @@ export function ProductCard({
 
 export function ImageSlider({ imageUrls }: { imageUrls: string[] }) {
   const [count, setCount] = useState(0);
-  
+
   useEffect(() => {
     const timer = setInterval(() => {
       setCount((prev) => {
@@ -102,7 +105,7 @@ export function ImageSlider({ imageUrls }: { imageUrls: string[] }) {
       clearInterval(timer);
     };
   }, [imageUrls.length]);
-  
+
   return (
     <div
       id="home-banner"

@@ -1,30 +1,14 @@
 import "./styles/App.css";
 import Navbar from "./components/navbar/navbar";
-import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
-
-export interface IProduct {
-  id: number;
-  title: string;
-  description: string;
-  category: string;
-  image: string;
-  price: number;
-  rating: {
-    rate: number;
-    count: number;
-  };
-}
-
-export type IProductContext = [
-  IProduct[],
-  IProduct[],
-  React.Dispatch<React.SetStateAction<IProduct[]>>
-];
+import { ProductContext } from "./context/ProductContext";
+import { useEffect, useState } from "react";
+import type { IProduct } from "./types/product";
 
 export default function App() {
   const [products, setProducts] = useState<IProduct[]>([]);
   const [wishList, setWishList] = useState<IProduct[]>([]);
+
   useEffect(() => {
     (async () => {
       const url = "https://fakestoreapi.com/products";
@@ -37,10 +21,15 @@ export default function App() {
       }
     })();
   }, []);
+
   return (
     <main id="container" className="p-4 font-main">
-      <Navbar />
-      <Outlet context={[products, wishList, setWishList]} />
+      <ProductContext.Provider
+        value={{ products, setProducts, wishList, setWishList }}
+      >
+        <Navbar />
+        <Outlet />
+      </ProductContext.Provider>
     </main>
   );
 }
