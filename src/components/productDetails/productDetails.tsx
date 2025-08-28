@@ -98,7 +98,7 @@ export default function PorductDetails() {
   return (
     <div
       id="product-card"
-      className="fixed w-full h-full z-20 inset-0 bg-neutral-50 p-2 flex flex-col"
+      className="fixed w-full h-full z-20 inset-0 bg-neutral-50 p-2 flex flex-col overflow-auto"
       ref={productRef}
     >
       <div className="flex flex-col gap-8 px-4 py-8 bg-neutral-200 rounded-4xl items-center">
@@ -120,8 +120,10 @@ export default function PorductDetails() {
         </div>
       </div>
       <div className="px-4 py-6 flex flex-col gap-4 border-b-1 border-neutral-300">
-        <div className="grid grid-cols-2">
-          <h3 className="text-lg">{selectedProduct.title}</h3>
+        <div className="grid grid-cols-[1fr_min-content]">
+          <h3 title={selectedProduct.title} className="text-lg">
+            {selectedProduct.title}
+          </h3>
           <button
             onClick={toggleFavorite}
             className="cursor-pointer bg-neutral-200 rounded-full p-1 flex max-w-fit aspect-square ml-auto"
@@ -166,8 +168,30 @@ export default function PorductDetails() {
           <p className="text-sm">({selectedProduct.rating.count} Reviews)</p>
         </div>
       </div>
-      <div>
-        <h3>Select Size</h3>
+      <div className="p-4 space-y-2 border-b-1 border-neutral-300">
+        <h3 className="font-bold text-lg">Select Size</h3>
+        <ul className="flex gap-2 items-center">
+          <li className="bg-green-600 border-1 border-neutral-400 rounded-full px-4 pt-2 text-neutral-50">
+            39
+          </li>
+          <li className="border-1 border-neutral-400 rounded-full px-4 pt-2 text-neutral-600">
+            40
+          </li>
+          <li className="border-1 border-neutral-400 rounded-full px-4 pt-2 text-neutral-600">
+            40
+          </li>
+          <li className="border-1 border-neutral-400 rounded-full px-4 pt-2 text-neutral-600">
+            42
+          </li>
+          <li className="border-1 border-neutral-400 rounded-full px-4 pt-2 text-neutral-600">
+            43
+          </li>
+        </ul>
+      </div>
+      <div className="w-full flex justify-center py-4">
+        <button className="bg-green-600 text-neutral-50 px-6 py-2 rounded-full">
+          Add to Cart
+        </button>
       </div>
     </div>
   );
