@@ -5,6 +5,7 @@ import { useProductContext } from "../../hooks/useProductContext";
 import { useRef, useEffect, useState, useLayoutEffect } from "react";
 import type { IProduct } from "../../types/product";
 import gsap from "gsap";
+import { ProductCard } from "../Utilities";
 
 export default function PorductDetails() {
   const productRef = useRef(null);
@@ -110,103 +111,130 @@ export default function PorductDetails() {
   }
 
   return (
-    <div
-      id="product-card"
-      className="fixed w-full h-full z-20 inset-0 bg-neutral-50 p-2 flex flex-col overflow-auto "
-      ref={productRef}
-    >
-      <div className="flex flex-col gap-8 px-4 py-8 bg-neutral-200 rounded-4xl items-center">
-        <div id="product-card-nav" className="w-full flex justify-between">
-          <Link to="#" onClick={handleBack}>
-            <ChevronLeft />
-          </Link>
-          <h1>Product Details</h1>
-          <button>
-            <EllipsisVertical />
-          </button>
+    <>
+      <div
+        id="product-card"
+        className="fixed w-full h-full z-20 inset-0 bg-neutral-50 p-2 flex flex-col overflow-auto lg:grid lg:grid-cols-2 gap-x-4 lg:static"
+        ref={productRef}
+      >
+        <div className="flex flex-col gap-8 px-4 py-8 bg-neutral-200 rounded-4xl items-center">
+          <div id="product-card-nav" className="w-full flex justify-between">
+            <Link to="#" onClick={handleBack}>
+              <ChevronLeft />
+            </Link>
+            <h1>Product Details</h1>
+            <button>
+              <EllipsisVertical />
+            </button>
+          </div>
+          <div>
+            <img
+              src={selectedProduct.image}
+              alt="product image"
+              className="max-h-80"
+            />
+          </div>
         </div>
         <div>
-          <img
-            src={selectedProduct.image}
-            alt="product image"
-            className="max-h-80"
-          />
-        </div>
-      </div>
-      <div className="px-4 py-6 flex flex-col gap-4 border-b-1 border-neutral-300">
-        <div className="grid grid-cols-[1fr_min-content] gap-2">
-          <h3 title={selectedProduct.title} className="text-lg">
-            {selectedProduct.title}
-          </h3>
-          <button
-            onClick={toggleFavorite}
-            className="cursor-pointer bg-neutral-200 rounded-full p-1 flex max-w-fit aspect-square ml-auto"
-          >
-            {isFavorite ? (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="red"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="none"
-                className="size-5"
+          <div className="px-4 py-6 flex flex-col gap-4 border-b-1 border-neutral-300 lg:mb-6">
+            <div className="grid grid-cols-[1fr_min-content] gap-2">
+              <h3 title={selectedProduct.title} className="text-lg">
+                {selectedProduct.title}
+              </h3>
+              <button
+                onClick={toggleFavorite}
+                className="cursor-pointer bg-neutral-200 rounded-full p-1 flex max-w-fit aspect-square ml-auto"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
-                />
-              </svg>
-            ) : (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="size-5"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
-                />
-              </svg>
-            )}
-          </button>
-        </div>
-        <h3 className="font-bold text-2xl">${selectedProduct.price}</h3>
+                {isFavorite ? (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="red"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="none"
+                    className="size-5"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
+                    />
+                  </svg>
+                ) : (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="currentColor"
+                    className="size-5"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
+                    />
+                  </svg>
+                )}
+              </button>
+            </div>
+            <h3 className="font-bold text-2xl">${selectedProduct.price}</h3>
 
-        <div className="flex items-center justify-center gap-1 border-1 border-neutral-200 bg-neutral-100 rounded-full max-w-fit py-1 px-2">
-          <p className="font-semibold">⭐ {selectedProduct.rating.rate}</p>
-          <p className="text-sm">({selectedProduct.rating.count} Reviews)</p>
+            <div className="flex items-center justify-center gap-1 border-1 border-neutral-200 bg-neutral-100 rounded-full max-w-fit py-1 px-2">
+              <p className="font-semibold">⭐ {selectedProduct.rating.rate}</p>
+              <p className="text-sm">
+                ({selectedProduct.rating.count} Reviews)
+              </p>
+            </div>
+          </div>
+          <div className="p-4 space-y-2 border-b-1 border-neutral-300 lg:mb-6">
+            <h3 className="font-bold text-lg">Select Size</h3>
+            <ul className="flex gap-2 items-center lg:mb-4">
+              <li className="bg-green-600 border-1 border-neutral-400 rounded-full px-4 pt-2 text-neutral-50">
+                39
+              </li>
+              <li className="border-1 border-neutral-400 rounded-full px-4 pt-2 text-neutral-600">
+                40
+              </li>
+              <li className="border-1 border-neutral-400 rounded-full px-4 pt-2 text-neutral-600">
+                40
+              </li>
+              <li className="border-1 border-neutral-400 rounded-full px-4 pt-2 text-neutral-600">
+                42
+              </li>
+              <li className="border-1 border-neutral-400 rounded-full px-4 pt-2 text-neutral-600">
+                43
+              </li>
+            </ul>
+          </div>
+          <div className="w-full flex justify-center py-4">
+            <button className="bg-green-600 text-neutral-50 px-6 py-2 rounded-full">
+              Add to Cart
+            </button>
+          </div>
         </div>
       </div>
-      <div className="p-4 space-y-2 border-b-1 border-neutral-300">
-        <h3 className="font-bold text-lg">Select Size</h3>
-        <ul className="flex gap-2 items-center">
-          <li className="bg-green-600 border-1 border-neutral-400 rounded-full px-4 pt-2 text-neutral-50">
-            39
-          </li>
-          <li className="border-1 border-neutral-400 rounded-full px-4 pt-2 text-neutral-600">
-            40
-          </li>
-          <li className="border-1 border-neutral-400 rounded-full px-4 pt-2 text-neutral-600">
-            40
-          </li>
-          <li className="border-1 border-neutral-400 rounded-full px-4 pt-2 text-neutral-600">
-            42
-          </li>
-          <li className="border-1 border-neutral-400 rounded-full px-4 pt-2 text-neutral-600">
-            43
-          </li>
-        </ul>
+      <div id="similar-products" className="hidden lg:block">
+        <section className="mt-4 space-y-2 mb-4">
+          <h1 className="font-bold flex justify-between">Similar Products</h1>
+          <div
+            id="cheapest-product"
+            className="grid gap-4 lg:grid-cols-4 xl:grid-cols-6"
+          >
+            {products
+              .filter((item) => item.category === selectedProduct.category)
+              .slice(0, 4)
+              .map((item) => (
+                <ProductCard
+                  key={item.id}
+                  product={item}
+                  wishList={wishList}
+                  setWishList={setWishList}
+                />
+              ))}
+          </div>
+        </section>
       </div>
-      <div className="w-full flex justify-center py-4">
-        <button className="bg-green-600 text-neutral-50 px-6 py-2 rounded-full">
-          Add to Cart
-        </button>
-      </div>
-    </div>
+    </>
   );
 }
