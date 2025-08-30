@@ -14,13 +14,14 @@ import { gsap } from "gsap";
 import { useProductContext } from "../../hooks/useProductContext";
 
 export default function MobileNavbar() {
-  const { cart } = useProductContext();
+  const { cart, products } = useProductContext();
+  const categories = [...new Set(products.map((item) => item.category))];
 
   return (
     <div className="lg:hidden">
       <div className="flex justify-between">
         <div>
-          <FlyoutMenu icon={<Menu />} links={["Shoes", "Clothes", "Shirts"]} />
+          <FlyoutMenu icon={<Menu />} categories={categories} />
         </div>
         <h1 className="font-logo text-2xl">
           <span className="text-green-600">Y</span>O
@@ -91,10 +92,10 @@ export default function MobileNavbar() {
 
 interface IFlyoutMent {
   icon: React.ReactNode;
-  links: string[];
+  categories: string[];
 }
 
-const FlyoutMenu = ({ icon, links }: IFlyoutMent) => {
+const FlyoutMenu = ({ icon, categories }: IFlyoutMent) => {
   const catRef = useRef<HTMLUListElement | null>(null);
   const [open, setOpen] = useState(false);
 
@@ -141,11 +142,11 @@ const FlyoutMenu = ({ icon, links }: IFlyoutMent) => {
         {icon}
       </button>
       <ul
-        className="hidden fixed left-0 top-0 h-full w-2/3 flex-col gap-4 items-center justify-center z-10 p-4 origin-left bg-green-600 text-neutral-50"
+        className="hidden fixed left-0 top-0 h-full w-2/3 flex-col gap-4 items-center justify-center z-15 p-4 origin-left bg-green-600 text-neutral-50"
         ref={catRef}
       >
         <X className="absolute top-4 right-4" onClick={() => setOpen(!open)} />
-        {links.map((item) => (
+        {categories.map((item) => (
           <li key={item}>
             <NavLink to={" "}>{item}</NavLink>
           </li>

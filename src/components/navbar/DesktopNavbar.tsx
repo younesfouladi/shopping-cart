@@ -5,7 +5,8 @@ import { useEffect, useRef, useState } from "react";
 import { useProductContext } from "../../hooks/useProductContext";
 
 export default function DesktopNavbar() {
-  const { cart } = useProductContext();
+  const { cart, products } = useProductContext();
+  const categories = [...new Set(products.map((item) => item.category))];
 
   return (
     <div className="hidden lg:flex justify-between items-center">
@@ -47,7 +48,7 @@ export default function DesktopNavbar() {
           </li>
         </ul>
       </div>
-      <FlyoutMenu title={"Category"} links={["Shoes", "Clothes", "Shirts"]} />
+      <FlyoutMenu title={"Category"} categories={categories} />
 
       <div className="flex gap-4 items-center">
         <label
@@ -60,7 +61,7 @@ export default function DesktopNavbar() {
             name="search"
             id="search"
             placeholder="What are you looking for?"
-            className="pl-10 w-full rounded-full p-2"
+            className="pl-10 w-fit rounded-full p-2"
           />
         </label>
         <NavLink
@@ -88,10 +89,10 @@ export default function DesktopNavbar() {
 
 interface IFlyoutMent {
   title: string;
-  links: string[];
+  categories: string[];
 }
 
-const FlyoutMenu = ({ title, links }: IFlyoutMent) => {
+const FlyoutMenu = ({ title, categories }: IFlyoutMent) => {
   const catRef = useRef<HTMLUListElement | null>(null);
   const [open, setOpen] = useState(false);
 
@@ -123,23 +124,23 @@ const FlyoutMenu = ({ title, links }: IFlyoutMent) => {
 
   return (
     <div
-      className="relative group w-fit m-auto flex flex-col"
+      className="relative group flex w-full justify-center"
       role="listitem"
       onMouseLeave={() => setOpen(false)}
     >
       <a
-        className="group-hover:text-green-600 hover:w-full text-center py-4 px-4"
+        className="group-hover:text-green-600 py-4 px-4"
         onMouseEnter={() => setOpen(true)}
         href=""
       >
         {title}
       </a>
       <ul
-        className="hidden absolute top-full left-1 flex-col gap-4 items-center p-4 origin-top bg-green-600 text-neutral-50 rounded-xl z-10"
+        className="hidden absolute top-full left-[48%] flex-col gap-4 p-4 origin-top bg-green-600 text-neutral-50 rounded-xl z-10"
         ref={catRef}
       >
         <span className="absolute w-4 h-4 bg-green-600 rotate-45 -top-2"></span>
-        {links.map((item) => (
+        {categories.map((item) => (
           <li key={item}>
             <NavLink to={" "}>{item}</NavLink>
           </li>
