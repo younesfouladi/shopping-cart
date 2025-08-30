@@ -45,6 +45,19 @@ export default function Cart() {
     }
   }
 
+  if (cart.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center mt-30 gap-10">
+        <p className="font-bold text-2xl font-logo">Shopping Cart is empty!</p>
+        <img
+          src="/images/sad-dog2.svg"
+          alt="sad dog cause of empty wish list"
+          className="w-9/10 sm:max-w-2/3 md:max-w-1/2 2xl:max-w-2/6 h-auto"
+        />
+      </div>
+    );
+  }
+
   return (
     <div
       className="fixed w-full h-full bg-neutral-50 py-2 px-4 inset-0 z-20"

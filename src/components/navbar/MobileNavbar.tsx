@@ -11,8 +11,11 @@ import {
 } from "lucide-react";
 import React, { useState, useEffect, useRef } from "react";
 import { gsap } from "gsap";
+import { useProductContext } from "../../hooks/useProductContext";
 
 export default function MobileNavbar() {
+  const { cart } = useProductContext();
+
   return (
     <div className="lg:hidden">
       <div className="flex justify-between">
@@ -48,13 +51,18 @@ export default function MobileNavbar() {
               <HeartPlus />
             </NavLink>
           </li>
-          <li>
+          <li className="relative">
             <NavLink
               to={"cart"}
               className={({ isActive }) => (isActive ? "text-green-600" : "")}
             >
               <ShoppingBag />
             </NavLink>
+            {cart.length > 0 && (
+              <span className="absolute -top-2 -right-2 bg-red-700 text-neutral-50 text-sm rounded-full flex items-center justify-center w-5 h-5">
+                {cart.length}
+              </span>
+            )}
           </li>
         </ul>
 

@@ -2,8 +2,11 @@ import { Link, NavLink } from "react-router-dom";
 import { ShoppingBag, UserRoundPen, Search } from "lucide-react";
 import { gsap } from "gsap";
 import { useEffect, useRef, useState } from "react";
+import { useProductContext } from "../../hooks/useProductContext";
 
 export default function DesktopNavbar() {
+  const { cart } = useProductContext();
+
   return (
     <div className="hidden lg:flex justify-between items-center">
       <div className="flex items-center">
@@ -63,10 +66,17 @@ export default function DesktopNavbar() {
         <NavLink
           to={"cart"}
           className={({ isActive }) =>
-            isActive ? "text-green-600 border-b-1 pb-1 font-bold" : ""
+            isActive
+              ? "text-green-600 border-b-1 pb-1 font-bold relative"
+              : "relative"
           }
         >
           <ShoppingBag />
+          {cart.length > 0 && (
+            <span className="absolute -top-2 -right-2 bg-red-700 text-neutral-50 text-sm rounded-full flex items-center justify-center w-5 h-5">
+              {cart.length}
+            </span>
+          )}
         </NavLink>
         <Link to={""} className="border-l-2 pl-4">
           <UserRoundPen />
