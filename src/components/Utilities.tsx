@@ -31,6 +31,16 @@ export function ProductCard({
     });
   };
 
+  function handleOpenLinkNewTab(
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+  ) {
+    console.log(window.screen.width);
+    if (window.screen.width >= 1024) {
+      e.preventDefault();
+      window.open(`/product/${product.id}`, "_blank");
+    }
+  }
+
   return (
     <div className="relative flex flex-col gap-2 bg-neutral-100 border-1 border-neutral-200 rounded-2xl p-4">
       <button
@@ -69,7 +79,10 @@ export function ProductCard({
           </svg>
         )}
       </button>
-      <Link to={`/product/${product.id}`}>
+      <Link
+        to={`/product/${product.id}`}
+        onClick={(e) => handleOpenLinkNewTab(e)}
+      >
         <img
           src={product.image}
           alt="product's image"

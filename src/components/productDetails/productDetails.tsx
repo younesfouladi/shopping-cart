@@ -118,7 +118,10 @@ export default function PorductDetails() {
         ref={productRef}
       >
         <div className="flex flex-col gap-8 px-4 py-8 bg-neutral-200 rounded-4xl items-center">
-          <div id="product-card-nav" className="w-full flex justify-between">
+          <div
+            id="product-card-nav"
+            className="w-full flex justify-between lg:hidden"
+          >
             <Link to="#" onClick={handleBack}>
               <ChevronLeft />
             </Link>
