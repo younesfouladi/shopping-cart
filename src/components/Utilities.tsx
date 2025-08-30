@@ -2,6 +2,7 @@ import { Spinner } from "flowbite-react";
 import { useEffect, useState } from "react";
 import type { IProduct } from "../types/product";
 import { Link } from "react-router-dom";
+import { useProductContext } from "../hooks/useProductContext";
 
 export function LoadingSpinner() {
   return (
@@ -11,16 +12,10 @@ export function LoadingSpinner() {
   );
 }
 
-export function ProductCard({
-  product,
-  wishList,
-  setWishList,
-}: {
-  product: IProduct;
-  wishList: IProduct[];
-  setWishList: React.Dispatch<React.SetStateAction<IProduct[]>>;
-}) {
+export function ProductCard({ product }: { product: IProduct }) {
+  const { wishList, setWishList, cart, setCart } = useProductContext();
   const isFavorite = wishList?.some((item) => item.id === product.id) || false;
+
   const toggleFavorite = () => {
     setWishList((prev) => {
       if (isFavorite) {
@@ -37,6 +32,37 @@ export function ProductCard({
     if (window.screen.width >= 1024) {
       e.preventDefault();
       window.open(`/product/${product.id}`, "_blank");
+    }
+  }
+
+  function handleAddToCart() {
+    setCart((prev) => [...prev, { quanity: 1, product: product }]);
+  }
+
+  function handleInrement() {
+    setCart((prev) =>
+      prev.map((item) =>
+        item.product.id === product.id
+          ? { ...item, quanity: item.quanity + 1 }
+          : item
+      )
+    );
+  }
+
+  function handleDecrement() {
+    const pr = cart.find((item) => item.product.id === product.id);
+    if (pr?.quanity === 1) {
+      setCart((prev) =>
+        prev.filter((item) => item.product.id !== pr.product.id)
+      );
+    } else {
+      setCart((prev) =>
+        prev.map((item) =>
+          item.product.id === product.id
+            ? { ...item, quanity: item.quanity - 1 }
+            : item
+        )
+      );
     }
   }
 
@@ -96,9 +122,32 @@ export function ProductCard({
       </p>
       <div className="flex items-center justify-between">
         <p className="font-bold">${product.price}</p>
-        <button className="gap-1 bg-green-700 text-neutral-50 px-4 py-1 rounded-lg">
-          Add
-        </button>
+        {cart.some((item) => item.product.id === product.id) ? (
+          <div className="flex items-center bg-neutral-200 rounded-full p-1 gap-2">
+            <button
+              className="text-green-600 text-2xl bg-neutral-50 rounded-full w-6 h-6 flex items-center justify-center"
+              onClick={handleDecrement}
+            >
+              -
+            </button>
+            <p className="font-bold">
+              {cart.find((item) => item.product.id === product.id)?.quanity}
+            </p>
+            <button
+              className="text-neutral-50 text-2xl bg-green-600 rounded-full w-6 h-6 flex items-center justify-center"
+              onClick={handleInrement}
+            >
+              +
+            </button>
+          </div>
+        ) : (
+          <button
+            className="gap-1 bg-green-700 text-neutral-50 px-4 py-1 rounded-lg"
+            onClick={handleAddToCart}
+          >
+            Add
+          </button>
+        )}
       </div>
     </div>
   );

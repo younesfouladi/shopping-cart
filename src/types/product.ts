@@ -14,9 +14,8 @@ export interface IProduct {
 }
 
 export interface ICart {
-  id: number;
   quanity: number;
-  price: number;
+  product: IProduct;
 }
 
 export interface ProductContextType {

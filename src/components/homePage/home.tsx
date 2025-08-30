@@ -3,7 +3,7 @@ import { ProductCard } from "../Utilities";
 import { useProductContext } from "../../hooks/useProductContext";
 
 export default function HomePage() {
-  const { products, wishList, setWishList } = useProductContext();
+  const { products } = useProductContext();
   if (products.length === 0) {
     return <LoadingSpinner />;
   }
@@ -32,12 +32,7 @@ export default function HomePage() {
           className="grid grid-cols-2 gap-4 lg:grid-cols-3 2xl:grid-cols-4"
         >
           {cheapest.slice(0, 4).map((item) => (
-            <ProductCard
-              key={item.id}
-              product={item}
-              wishList={wishList}
-              setWishList={setWishList}
-            />
+            <ProductCard key={item.id} product={item} />
           ))}
         </div>
       </section>
@@ -50,12 +45,7 @@ export default function HomePage() {
           className="grid grid-cols-2 gap-4 lg:grid-cols-3 2xl:grid-cols-4"
         >
           {trending.slice(0, 4).map((item) => (
-            <ProductCard
-              key={item.id}
-              product={item}
-              wishList={wishList}
-              setWishList={setWishList}
-            />
+            <ProductCard key={item.id} product={item} />
           ))}
         </div>
       </section>
@@ -71,12 +61,7 @@ export default function HomePage() {
             .filter((item) => item.category.includes("women's clothing"))
             .slice(0, 4)
             .map((item) => (
-              <ProductCard
-                key={item.id}
-                product={item}
-                wishList={wishList}
-                setWishList={setWishList}
-              />
+              <ProductCard key={item.id} product={item} />
             ))}
         </div>
       </section>

@@ -3,7 +3,7 @@ import { LoadingSpinner } from "../Utilities";
 import { useProductContext } from "../../hooks/useProductContext";
 
 export default function ExplorePage() {
-  const { products, wishList, setWishList } = useProductContext();
+  const { products } = useProductContext();
 
   if (products.length === 0) {
     return <LoadingSpinner />;
@@ -18,12 +18,7 @@ export default function ExplorePage() {
           className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5"
         >
           {products.map((item) => (
-            <ProductCard
-              key={item.id}
-              product={item}
-              wishList={wishList}
-              setWishList={setWishList}
-            />
+            <ProductCard key={item.id} product={item} />
           ))}
         </div>
       </section>

@@ -9,7 +9,7 @@ import type { ICart } from "./types/product";
 export default function App() {
   const [products, setProducts] = useState<IProduct[]>([]);
   const [wishList, setWishList] = useState<IProduct[]>([]);
-  const [cart, setCart] = useState<ICart[]>([{ id: 0, quanity: 0, price: 0 }]);
+  const [cart, setCart] = useState<ICart[]>([]);
 
   useEffect(() => {
     (async () => {
