@@ -10,7 +10,8 @@ import { ProductCard } from "../Utilities";
 export default function PorductDetails() {
   const productRef = useRef(null);
   const { productId } = useParams();
-  const { products, wishList, setWishList } = useProductContext();
+  const { products, wishList, setWishList, cart, setCart } =
+    useProductContext();
   const [selectedProduct, setSelectedProduct] = useState<IProduct | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -83,6 +84,37 @@ export default function PorductDetails() {
       }
     });
   };
+
+  function handleAddToCart(product: IProduct) {
+    setCart((prev) => [...prev, { quanity: 1, product: product }]);
+  }
+
+  function handleInrement(product: IProduct) {
+    setCart((prev) =>
+      prev.map((item) =>
+        item.product.id === product.id
+          ? { ...item, quanity: item.quanity + 1 }
+          : item
+      )
+    );
+  }
+
+  function handleDecrement(product: IProduct) {
+    const pr = cart.find((item) => item.product.id === product.id);
+    if (pr?.quanity === 1) {
+      setCart((prev) =>
+        prev.filter((item) => item.product.id !== pr.product.id)
+      );
+    } else {
+      setCart((prev) =>
+        prev.map((item) =>
+          item.product.id === product.id
+            ? { ...item, quanity: item.quanity - 1 }
+            : item
+        )
+      );
+    }
+  }
 
   if (loading) {
     return (
@@ -211,9 +243,35 @@ export default function PorductDetails() {
             </ul>
           </div>
           <div className="w-full flex justify-center py-4">
-            <button className="bg-green-600 text-neutral-50 px-6 py-2 rounded-full">
-              Add to Cart
-            </button>
+            {cart.some((item) => item.product.id === Number(productId)) ? (
+              <div className="flex items-center bg-neutral-200 rounded-full p-1 gap-2">
+                <button
+                  className="text-green-600 text-2xl bg-neutral-50 rounded-full w-6 h-6 flex items-center justify-center"
+                  onClick={() => handleDecrement(selectedProduct)}
+                >
+                  -
+                </button>
+                <p className="font-bold">
+                  {
+                    cart.find((item) => item.product.id === Number(productId))
+                      ?.quanity
+                  }
+                </p>
+                <button
+                  className="text-neutral-50 text-2xl bg-green-600 rounded-full w-6 h-6 flex items-center justify-center"
+                  onClick={() => handleInrement(selectedProduct)}
+                >
+                  +
+                </button>
+              </div>
+            ) : (
+              <button
+                onClick={() => handleAddToCart(selectedProduct)}
+                className="bg-green-600 text-neutral-50 px-6 py-2 rounded-full"
+              >
+                Add to Cart
+              </button>
+            )}
           </div>
         </div>
       </div>
@@ -228,12 +286,7 @@ export default function PorductDetails() {
               .filter((item) => item.category === selectedProduct.category)
               .slice(0, 4)
               .map((item) => (
-                <ProductCard
-                  key={item.id}
-                  product={item}
-                  wishList={wishList}
-                  setWishList={setWishList}
-                />
+                <ProductCard key={item.id} product={item} />
               ))}
           </div>
         </section>
