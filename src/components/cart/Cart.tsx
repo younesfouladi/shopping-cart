@@ -8,7 +8,7 @@ import type { ICart } from "../../types/product";
 export default function Cart() {
   const { cart, setCart } = useProductContext();
   const cartRef = useRef(null);
-
+  const deliveryFee: number = 15;
   const handleBack = () => {
     gsap.fromTo(
       cartRef.current,
@@ -65,7 +65,7 @@ export default function Cart() {
     >
       <div
         id="product-card-nav"
-        className="w-full flex justify-between py-8 items-center"
+        className="w-full flex justify-between py-6 items-center"
       >
         <Link
           to="#"
@@ -79,7 +79,7 @@ export default function Cart() {
           <EllipsisVertical />
         </button>
       </div>
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 h-full max-h-3/5 overflow-auto">
         {cart.map((item) => (
           <div key={item.product.id} className="flex gap-4">
             <div className="max-w-32 max-h-32 bg-neutral-200 rounded-2xl p-4 flex items-center justify-center">
@@ -108,6 +108,35 @@ export default function Cart() {
             </div>
           </div>
         ))}
+      </div>
+      <div className="flex flex-col py-4 border-t-1 mt-1 border-neutral-400 rounded-xl px-2 gap-4">
+        <div className="border-b-1 border-neutral-400 border-dashed flex flex-col gap-1 pb-4">
+          <div className="flex w-full justify-between">
+            <h4 className="font-semibold">Sub Total</h4>
+            <p className="font-semibold">
+              {cart.reduce((acc, item) => acc + item.product.price, 0)}
+            </p>
+          </div>
+          <div className="flex w-full justify-between">
+            <h4 className="font-semibold">Delivery Fee</h4>
+            <p className="font-semibold">${deliveryFee}</p>
+          </div>
+          <div className="flex w-full justify-between">
+            <h4>Discount</h4>
+            <p className="font-semibold text-green-600">$0</p>
+          </div>
+        </div>
+        <div className="flex w-full items-center justify-between">
+          <h4 className="font-semibold">Total</h4>
+          <h3 className="font-bold text-xl">
+            $
+            {cart.reduce((acc, item) => acc + item.product.price, 0) +
+              deliveryFee}
+          </h3>
+        </div>
+        <button className="bg-green-600 text-neutral-50 rounded-full py-2">
+          Checkout
+        </button>
       </div>
     </div>
   );
