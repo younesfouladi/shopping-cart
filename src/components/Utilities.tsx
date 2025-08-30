@@ -34,7 +34,6 @@ export function ProductCard({
   function handleOpenLinkNewTab(
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) {
-    console.log(window.screen.width);
     if (window.screen.width >= 1024) {
       e.preventDefault();
       window.open(`/product/${product.id}`, "_blank");

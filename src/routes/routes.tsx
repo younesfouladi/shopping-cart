@@ -1,4 +1,5 @@
 import App from "../App";
+import Cart from "../components/cart/Cart";
 import ExplorePage from "../components/explorePage/explore";
 import HomePage from "../components/homePage/home";
 import PorductDetails from "../components/productDetails/productDetails";
@@ -21,6 +22,7 @@ const routes = [
         path: "product/:productId",
         element: <PorductDetails />,
       },
+      { path: "cart", element: <Cart /> },
     ],
   },
 ];

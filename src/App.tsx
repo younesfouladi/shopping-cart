@@ -4,10 +4,12 @@ import { Outlet } from "react-router-dom";
 import { ProductContext } from "./context/ProductContext";
 import { useEffect, useState } from "react";
 import type { IProduct } from "./types/product";
+import type { ICart } from "./types/product";
 
 export default function App() {
   const [products, setProducts] = useState<IProduct[]>([]);
   const [wishList, setWishList] = useState<IProduct[]>([]);
+  const [cart, setCart] = useState<ICart[]>([{ id: 0, quanity: 0, price: 0 }]);
 
   useEffect(() => {
     (async () => {
@@ -25,7 +27,7 @@ export default function App() {
   return (
     <main id="container" className="p-4 font-main">
       <ProductContext.Provider
-        value={{ products, setProducts, wishList, setWishList }}
+        value={{ products, setProducts, wishList, setWishList, cart, setCart }}
       >
         <Navbar />
         <Outlet />
