@@ -27,37 +27,57 @@ export default function MobileNavbar() {
           <span className="text-green-600">Y</span>O
           <span className="text-green-600">F</span>I
         </h1>
-        <ul className="z-10 fixed flex gap-8 bottom-4 left-1/2 -translate-x-1/2 bg-neutral-900 rounded-full py-4 px-8 text-neutral-400">
+        <ul className="z-10 fixed flex gap-6 bottom-4 left-1/2 -translate-x-1/2 bg-neutral-900 rounded-full px-4 text-neutral-400 items-center">
           <li>
             <NavLink
               to={"/"}
-              className={({ isActive }) => (isActive ? "text-green-600" : "")}
+              className={({ isActive }) =>
+                isActive
+                  ? "text-neutral-50 flex gap-2 bg-green-600 p-2  rounded-full"
+                  : "rounded-full p-2 group"
+              }
             >
               <Store />
+              <p className="group-last:hidden">Home</p>
             </NavLink>
           </li>
           <li>
             <NavLink
               to={"explore"}
-              className={({ isActive }) => (isActive ? "text-green-600" : "")}
+              className={({ isActive }) =>
+                isActive
+                  ? "text-neutral-50 flex gap-2 bg-green-600 p-2  rounded-full"
+                  : "rounded-full p-2 group"
+              }
             >
               <PackageSearch />
+              <p className="group-last:hidden">Explore</p>
             </NavLink>
           </li>
           <li>
             <NavLink
               to={"wishlist"}
-              className={({ isActive }) => (isActive ? "text-green-600" : "")}
+              className={({ isActive }) =>
+                isActive
+                  ? "text-neutral-50 flex gap-2 bg-green-600 p-2  rounded-full"
+                  : "rounded-full p-2 group"
+              }
             >
               <HeartPlus />
+              <p className="group-last:hidden">Wishlist</p>
             </NavLink>
           </li>
           <li className="relative">
             <NavLink
               to={"cart"}
-              className={({ isActive }) => (isActive ? "text-green-600" : "")}
+              className={({ isActive }) =>
+                isActive
+                  ? "text-neutral-50 flex gap-2 bg-green-600 p-2  rounded-full"
+                  : "rounded-full p-2 group"
+              }
             >
               <ShoppingBag />
+              <p className="group-last:hidden">Cart</p>
             </NavLink>
             {cart.length > 0 && (
               <span className="absolute -top-2 -right-2 bg-red-700 text-neutral-50 text-sm rounded-full flex items-center justify-center w-5 h-5">
@@ -148,7 +168,7 @@ const FlyoutMenu = ({ icon, categories }: IFlyoutMent) => {
         <X className="absolute top-4 right-4" onClick={() => setOpen(!open)} />
         {categories.map((item) => (
           <li key={item}>
-            <NavLink to={" "}>{item}</NavLink>
+            <Link to={" "}>{item}</Link>
           </li>
         ))}
       </ul>

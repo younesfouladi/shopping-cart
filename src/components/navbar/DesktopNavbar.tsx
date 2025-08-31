@@ -142,7 +142,7 @@ const FlyoutMenu = ({ title, categories }: IFlyoutMent) => {
         <span className="absolute w-4 h-4 bg-green-600 rotate-45 -top-2"></span>
         {categories.map((item) => (
           <li key={item}>
-            <NavLink to={" "}>{item}</NavLink>
+            <Link to={" "}>{item}</Link>
           </li>
         ))}
       </ul>
