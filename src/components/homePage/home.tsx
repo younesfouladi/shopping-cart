@@ -29,7 +29,7 @@ export default function HomePage() {
         </h1>
         <div
           id="cheapest-product"
-          className="grid grid-cols-2 gap-4 lg:grid-cols-3 2xl:grid-cols-4"
+          className="grid grid-cols-2 gap-4 lg:grid-cols-3 2xl:grid-cols-5"
         >
           {cheapest.slice(0, 4).map((item) => (
             <ProductCard key={item.id} product={item} />
@@ -42,7 +42,7 @@ export default function HomePage() {
         </h1>
         <div
           id="cheapest-product"
-          className="grid grid-cols-2 gap-4 lg:grid-cols-3 2xl:grid-cols-4"
+          className="grid grid-cols-2 gap-4 lg:grid-cols-3 2xl:grid-cols-5"
         >
           {trending.slice(0, 4).map((item) => (
             <ProductCard key={item.id} product={item} />
@@ -55,7 +55,7 @@ export default function HomePage() {
         </h1>
         <div
           id="cheapest-product"
-          className="grid grid-cols-2 gap-4 lg:grid-cols-3 2xl:grid-cols-4"
+          className="grid grid-cols-2 gap-4 lg:grid-cols-3 2xl:grid-cols-5"
         >
           {products
             .filter((item) => item.category.includes("women's clothing"))

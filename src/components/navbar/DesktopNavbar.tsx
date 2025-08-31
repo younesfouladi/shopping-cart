@@ -208,7 +208,7 @@ const FlyoutMenu = ({ title, categories }: IFlyoutMent) => {
       onMouseLeave={() => setOpen(false)}
     >
       <a
-        className="group-hover:text-green-600 py-4 px-4"
+        className="hover:text-green-600 py-4 px-4"
         onMouseEnter={() => setOpen(true)}
         href=""
       >

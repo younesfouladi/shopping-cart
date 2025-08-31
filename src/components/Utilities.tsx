@@ -171,7 +171,7 @@ export function ImageSlider({ imageUrls }: { imageUrls: string[] }) {
   return (
     <div
       id="home-banner"
-      className="mb-4 w-full overflow-hidden rounded-xl lg:w-2/3 mx-auto"
+      className="mb-4 w-full overflow-hidden rounded-xl lg:w-2/3 mx-auto 2xl:w-1/2"
     >
       <div
         id="slider-container"
