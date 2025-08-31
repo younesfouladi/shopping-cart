@@ -27,7 +27,7 @@ export default function MobileNavbar({
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.trim() === "") {
       setSearchResult([]);
-      setSearchValue(e.target.value);
+      setSearchValue(e.target.value.trimStart());
       return;
     }
     setSearchValue(e.target.value);
@@ -58,7 +58,7 @@ export default function MobileNavbar({
       </div>
       <div
         className={
-          searchValue
+          searchResult.length > 0
             ? "fixed inset-0 w-full h-full z-18 flex flex-col bg-neutral-50 p-6"
             : ""
         }
