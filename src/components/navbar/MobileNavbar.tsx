@@ -12,9 +12,10 @@ import {
 import React, { useState, useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { useProductContext } from "../../hooks/useProductContext";
+import { motion, AnimatePresence } from "motion/react";
 
 export default function MobileNavbar() {
-  const { cart, products } = useProductContext();
+  const { products } = useProductContext();
   const categories = [...new Set(products.map((item) => item.category))];
 
   return (
@@ -27,65 +28,8 @@ export default function MobileNavbar() {
           <span className="text-green-600">Y</span>O
           <span className="text-green-600">F</span>I
         </h1>
-        <ul className="z-10 fixed flex gap-6 bottom-4 left-1/2 -translate-x-1/2 bg-neutral-900 rounded-full px-4 text-neutral-400 items-center">
-          <li>
-            <NavLink
-              to={"/"}
-              className={({ isActive }) =>
-                isActive
-                  ? "text-neutral-50 flex gap-2 bg-green-600 p-2  rounded-full"
-                  : "rounded-full p-2 group"
-              }
-            >
-              <Store />
-              <p className="group-last:hidden">Home</p>
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to={"explore"}
-              className={({ isActive }) =>
-                isActive
-                  ? "text-neutral-50 flex gap-2 bg-green-600 p-2  rounded-full"
-                  : "rounded-full p-2 group"
-              }
-            >
-              <PackageSearch />
-              <p className="group-last:hidden">Explore</p>
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to={"wishlist"}
-              className={({ isActive }) =>
-                isActive
-                  ? "text-neutral-50 flex gap-2 bg-green-600 p-2  rounded-full"
-                  : "rounded-full p-2 group"
-              }
-            >
-              <HeartPlus />
-              <p className="group-last:hidden">Wishlist</p>
-            </NavLink>
-          </li>
-          <li className="relative">
-            <NavLink
-              to={"cart"}
-              className={({ isActive }) =>
-                isActive
-                  ? "text-neutral-50 flex gap-2 bg-green-600 p-2  rounded-full"
-                  : "rounded-full p-2 group"
-              }
-            >
-              <ShoppingBag />
-              <p className="group-last:hidden">Cart</p>
-            </NavLink>
-            {cart.length > 0 && (
-              <span className="absolute -top-2 -right-2 bg-red-700 text-neutral-50 text-sm rounded-full flex items-center justify-center w-5 h-5">
-                {cart.length}
-              </span>
-            )}
-          </li>
-        </ul>
+
+        <AnimatedNav />
 
         <div>
           <Link to={""}>
@@ -175,3 +119,83 @@ const FlyoutMenu = ({ icon, categories }: IFlyoutMent) => {
     </>
   );
 };
+
+export function AnimatedNav() {
+  const { cart } = useProductContext();
+
+  const items = [
+    { to: "/", label: "Home", Icon: Store },
+    { to: "explore", label: "Explore", Icon: PackageSearch },
+    { to: "wishlist", label: "Wishlist", Icon: HeartPlus },
+    { to: "cart", label: "Cart", Icon: ShoppingBag, badge: true },
+  ];
+
+  return (
+    <ul className="z-10 fixed flex gap-6 bottom-4 left-1/2 -translate-x-1/2 bg-neutral-900 rounded-full px-4 text-neutral-400 items-center p-2">
+      {items.map((it) => (
+        <li key={it.to} className="relative">
+          <NavLink to={it.to}>
+            {({ isActive }) => (
+              <div className="relative flex items-center">
+                <AnimatePresence>
+                  {isActive && (
+                    <motion.span
+                      layoutId="active-pill"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 500,
+                        damping: 30,
+                      }}
+                      className="absolute inset-0 rounded-full bg-green-600"
+                    />
+                  )}
+                </AnimatePresence>
+
+                <motion.div
+                  className="relative z-10 flex gap-2 items-center rounded-full p-2 group"
+                  animate={{ scale: isActive ? 1.06 : 1 }}
+                  whileHover={{ scale: 1.08 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                >
+                  <it.Icon
+                    className={isActive ? "w-5 h-5 text-neutral-50" : "w-5 h-5"}
+                  />
+
+                  <motion.p
+                    className={
+                      isActive ? "text-neutral-50" : "group-last:hidden"
+                    }
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: isActive ? 1 : 0 }}
+                    transition={{ duration: 0.12 }}
+                  >
+                    {it.label}
+                  </motion.p>
+                </motion.div>
+              </div>
+            )}
+          </NavLink>
+
+          {it.to === "cart" && (
+            <AnimatePresence>
+              {cart.length > 0 && (
+                <motion.span
+                  initial={{ scale: 0, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0, opacity: 0 }}
+                  transition={{ type: "spring", stiffness: 700, damping: 30 }}
+                  className="absolute -top-1 -right-1 bg-red-700 text-neutral-50 text-sm rounded-full flex items-center justify-center w-5 h-5 z-20"
+                >
+                  {cart.length}
+                </motion.span>
+              )}
+            </AnimatePresence>
+          )}
+        </li>
+      ))}
+    </ul>
+  );
+}
