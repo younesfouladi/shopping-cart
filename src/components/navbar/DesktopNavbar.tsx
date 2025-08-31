@@ -1,9 +1,14 @@
 import { Link, NavLink } from "react-router-dom";
 import { ShoppingBag, UserRoundPen, Search, X } from "lucide-react";
 import { gsap } from "gsap";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ChangeEvent } from "react";
 import { useProductContext } from "../../hooks/useProductContext";
 import type { INavbarSearch } from "./navbar";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 export default function DesktopNavbar({
   searchValue,
@@ -30,10 +35,21 @@ export default function DesktopNavbar({
   return (
     <div className="hidden lg:flex justify-between items-center">
       <div className="flex items-center">
-        <h1 className="font-logo text-2xl">
-          <span className="text-green-600">Y</span>O
-          <span className="text-green-600">F</span>I
-        </h1>
+        <Tooltip>
+          <TooltipTrigger>
+            <h1 className="font-logo text-2xl">
+              <span className="text-green-600">Y</span>O
+              <span className="text-green-600">F</span>I
+            </h1>
+          </TooltipTrigger>
+          <TooltipContent>
+            <a href="https://github.com/younesfouladi/" target="_blank">
+              {" "}
+              Created by Younes Fouladi
+            </a>
+          </TooltipContent>
+        </Tooltip>
+
         <ul className="flex gap-8 rounded-full py-4 px-8 ">
           <li>
             <NavLink

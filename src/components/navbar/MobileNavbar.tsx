@@ -14,6 +14,11 @@ import { gsap } from "gsap";
 import { useProductContext } from "../../hooks/useProductContext";
 import { motion, AnimatePresence } from "motion/react";
 import type { INavbarSearch } from "./navbar";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 export default function MobileNavbar({
   searchValue,
@@ -43,11 +48,19 @@ export default function MobileNavbar({
         <div>
           <FlyoutMenu icon={<Menu />} categories={categories} />
         </div>
-        <h1 className="font-logo text-2xl">
-          <span className="text-green-600">Y</span>O
-          <span className="text-green-600">F</span>I
-        </h1>
-
+        <Tooltip>
+          <TooltipTrigger>
+            <h1 className="font-logo text-2xl">
+              <span className="text-green-600">Y</span>O
+              <span className="text-green-600">F</span>I
+            </h1>
+          </TooltipTrigger>
+          <TooltipContent>
+            <a href="https://github.com/younesfouladi/" target="_blank">
+              Created by Younes Fouladi
+            </a>
+          </TooltipContent>
+        </Tooltip>
         <AnimatedNav />
 
         <div>
