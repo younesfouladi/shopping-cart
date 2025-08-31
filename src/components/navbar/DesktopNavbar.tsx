@@ -1,12 +1,31 @@
 import { Link, NavLink } from "react-router-dom";
-import { ShoppingBag, UserRoundPen, Search } from "lucide-react";
+import { ShoppingBag, UserRoundPen, Search, X } from "lucide-react";
 import { gsap } from "gsap";
 import { useEffect, useRef, useState } from "react";
 import { useProductContext } from "../../hooks/useProductContext";
+import type { INavbarSearch } from "./navbar";
 
-export default function DesktopNavbar() {
+export default function DesktopNavbar({
+  searchValue,
+  searchResult,
+  setSearchValue,
+  setSearchResult,
+}: INavbarSearch) {
   const { cart, products } = useProductContext();
   const categories = [...new Set(products.map((item) => item.category))];
+
+  const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value.trim() === "") {
+      setSearchResult([]);
+      setSearchValue(e.target.value.trimStart());
+      return;
+    }
+    setSearchValue(e.target.value);
+    const result = products.filter((item) =>
+      item.title.toLowerCase().includes(searchValue.toLowerCase())
+    );
+    setSearchResult(result);
+  };
 
   return (
     <div className="hidden lg:flex justify-between items-center">
@@ -51,19 +70,56 @@ export default function DesktopNavbar() {
       <FlyoutMenu title={"Category"} categories={categories} />
 
       <div className="flex gap-4 items-center">
-        <label
-          htmlFor="search"
-          className="relative bg-neutral-200 rounded-full flex gap-2 my-4"
-        >
-          <Search className="absolute left-5 top-1/2 -translate-1/2" />
-          <input
-            type="text"
-            name="search"
-            id="search"
-            placeholder="What are you looking for?"
-            className="pl-10 w-fit rounded-full p-2"
-          />
-        </label>
+        <div className={"relative flex flex-col bg-neutral-50"}>
+          <label
+            htmlFor="search"
+            className="relative bg-neutral-200 rounded-full flex gap-2 my-4"
+          >
+            <Search className="absolute left-5 top-1/2 -translate-1/2" />
+            <input
+              type="text"
+              name="search"
+              id="search"
+              value={searchValue}
+              onChange={(e) => handleSearch(e)}
+              placeholder="What are you looking for?"
+              className="pl-10 w-fit rounded-full p-2"
+            />
+            <button
+              className={
+                searchValue
+                  ? "absolute right-0 top-1/2 -translate-1/2 cursor-pointer"
+                  : "hidden"
+              }
+              onClick={() => {
+                setSearchValue("");
+                setSearchResult([]);
+              }}
+            >
+              <X />
+            </button>
+          </label>
+          <div
+            id="search-result"
+            className={
+              searchResult.length > 0
+                ? "2xl:grid absolute flex flex-col 2xl:grid-cols-2 gap-4 overflow-auto z-18 bg-neutral-50 border-1 border-neutral-300 p-4 rounded-2xl top-16 shadow-xl right-0 w-[30vw] max-h-[70vh]"
+                : ""
+            }
+          >
+            {searchResult.length > 0 &&
+              searchResult.map((item) => (
+                <Link to={`/product/${item.id}`}>
+                  <div key={item.id} className="flex w-full items-center gap-4">
+                    <div className="max-w-1/5 bg-neutral-200 rounded-2xl p-2">
+                      <img src={item.image} alt="product image" />
+                    </div>
+                    <p className="text-sm font-semibold">{item.title}</p>
+                  </div>
+                </Link>
+              ))}
+          </div>
+        </div>
         <NavLink
           to={"cart"}
           className={({ isActive }) =>

@@ -22,7 +22,12 @@ export default function Navbar() {
         searchValue={searchValue}
         setSearchValue={setSearchValue}
       />
-      <DesktopNavbar />
+      <DesktopNavbar
+        searchResult={searchResult}
+        setSearchResult={setSearchResult}
+        searchValue={searchValue}
+        setSearchValue={setSearchValue}
+      />
     </nav>
   );
 }

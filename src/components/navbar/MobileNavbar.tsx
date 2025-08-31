@@ -91,7 +91,12 @@ export default function MobileNavbar({
             <X />
           </button>
         </label>
-        <div id="search-result" className="flex flex-col gap-4 overflow-auto">
+        <div
+          id="search-result"
+          className={
+            searchResult.length > 0 ? "flex flex-col gap-4 overflow-auto" : ""
+          }
+        >
           {searchResult.length > 0 &&
             searchResult.map((item) => (
               <Link to={`/product/${item.id}`}>
