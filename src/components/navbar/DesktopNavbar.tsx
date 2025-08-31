@@ -1,5 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
-import { ShoppingBag, UserRoundPen, Search, X } from "lucide-react";
+import { ShoppingBag, Search, X } from "lucide-react";
 import { gsap } from "gsap";
 import { useEffect, useRef, useState, type ChangeEvent } from "react";
 import { useProductContext } from "../../hooks/useProductContext";
@@ -9,6 +9,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { ThemeSwitch } from "../Utilities";
 
 export default function DesktopNavbar({
   searchValue,
@@ -55,7 +56,9 @@ export default function DesktopNavbar({
             <NavLink
               to={"/"}
               className={({ isActive }) =>
-                isActive ? "text-green-600 border-b-2 pb-1 font-bold" : ""
+                isActive
+                  ? "text-green-600 border-b-2 pb-1 font-bold border-green-800"
+                  : ""
               }
             >
               Home
@@ -65,7 +68,9 @@ export default function DesktopNavbar({
             <NavLink
               to={"explore"}
               className={({ isActive }) =>
-                isActive ? "text-green-600 border-b-1 pb-1 font-bold" : ""
+                isActive
+                  ? "text-green-600 border-b-1 pb-1 font-bold border-green-800"
+                  : ""
               }
             >
               Explore
@@ -75,7 +80,9 @@ export default function DesktopNavbar({
             <NavLink
               to={"wishlist"}
               className={({ isActive }) =>
-                isActive ? "text-green-600 border-b-1 pb-1 font-bold" : ""
+                isActive
+                  ? "text-green-600 border-b-1 pb-1 font-bold border-green-800"
+                  : ""
               }
             >
               Wishlist
@@ -86,10 +93,12 @@ export default function DesktopNavbar({
       <FlyoutMenu title={"Category"} categories={categories} />
 
       <div className="flex gap-4 items-center">
-        <div className={"relative flex flex-col bg-neutral-50"}>
+        <div
+          className={"relative flex flex-col bg-neutral-50 dark:bg-gray-900"}
+        >
           <label
             htmlFor="search"
-            className="relative bg-neutral-200 rounded-full flex gap-2 my-4"
+            className="relative bg-neutral-200 rounded-full flex gap-2 my-4 dark:bg-slate-800"
           >
             <Search className="absolute left-5 top-1/2 -translate-1/2" />
             <input
@@ -119,7 +128,7 @@ export default function DesktopNavbar({
             id="search-result"
             className={
               searchResult.length > 0
-                ? "2xl:grid absolute flex flex-col 2xl:grid-cols-2 gap-4 overflow-auto z-18 bg-neutral-50 border-1 border-neutral-300 p-4 rounded-2xl top-16 shadow-xl right-0 w-[30vw] max-h-[70vh]"
+                ? "2xl:grid absolute flex flex-col 2xl:grid-cols-2 gap-4 overflow-auto z-18 bg-neutral-50 border-1 border-neutral-300 p-4 rounded-2xl top-16 shadow-xl right-0 w-[30vw] max-h-[70vh] dark:bg-slate-800 dark:border-slate-600"
                 : ""
             }
           >
@@ -127,7 +136,7 @@ export default function DesktopNavbar({
               searchResult.map((item) => (
                 <Link to={`/product/${item.id}`}>
                   <div key={item.id} className="flex w-full items-center gap-4">
-                    <div className="max-w-1/5 bg-neutral-200 rounded-2xl p-2">
+                    <div className="max-w-1/5 bg-neutral-200 rounded-2xl p-2 dark:bg-slate-700">
                       <img src={item.image} alt="product image" />
                     </div>
                     <p className="text-sm font-semibold">{item.title}</p>
@@ -151,9 +160,7 @@ export default function DesktopNavbar({
             </span>
           )}
         </NavLink>
-        <Link to={""} className="border-l-2 pl-4">
-          <UserRoundPen />
-        </Link>
+        <ThemeSwitch />
       </div>
     </div>
   );

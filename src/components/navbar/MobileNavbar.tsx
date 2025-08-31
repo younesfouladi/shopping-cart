@@ -4,7 +4,6 @@ import {
   Menu,
   HeartPlus,
   Store,
-  UserRoundPen,
   PackageSearch,
   X,
   Search,
@@ -19,6 +18,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { ThemeSwitch } from "../Utilities";
 
 export default function MobileNavbar({
   searchValue,
@@ -64,21 +64,19 @@ export default function MobileNavbar({
         <AnimatedNav />
 
         <div>
-          <Link to={""}>
-            <UserRoundPen />
-          </Link>
+          <ThemeSwitch />
         </div>
       </div>
       <div
         className={
           searchResult.length > 0
-            ? "fixed inset-0 w-full h-full z-18 flex flex-col bg-neutral-50 p-6"
+            ? "fixed inset-0 w-full h-full z-18 flex flex-col bg-neutral-50 p-6 dark:bg-gray-900"
             : ""
         }
       >
         <label
           htmlFor="search"
-          className="relative bg-neutral-200 rounded-full flex gap-2 my-4"
+          className="relative bg-neutral-200 rounded-full flex gap-2 my-4 dark:bg-slate-800"
         >
           <Search className="absolute left-5 top-1/2 -translate-1/2" />
           <input
@@ -114,7 +112,7 @@ export default function MobileNavbar({
             searchResult.map((item) => (
               <Link to={`/product/${item.id}`}>
                 <div key={item.id} className="flex w-full items-center gap-4">
-                  <div className="max-w-1/5 bg-neutral-200 rounded-2xl p-2">
+                  <div className="max-w-1/5 bg-neutral-200 rounded-2xl p-2 dark:bg-slate-950">
                     <img src={item.image} alt="product image" />
                   </div>
                   <p className="text-sm font-semibold">{item.title}</p>

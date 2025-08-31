@@ -25,7 +25,10 @@ export default function App() {
   }, []);
 
   return (
-    <main id="container" className="p-4 font-main">
+    <main
+      id="container"
+      className="p-4 font-main min-h-full bg-[#fafafa] dark:bg-gray-900"
+    >
       <ProductContext.Provider
         value={{ products, setProducts, wishList, setWishList, cart, setCart }}
       >

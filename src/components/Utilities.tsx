@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import type { IProduct } from "../types/product";
 import { Link } from "react-router-dom";
 import { useProductContext } from "../hooks/useProductContext";
+import { SunMedium, MoonStar } from "lucide-react";
 
 export function LoadingSpinner() {
   return (
@@ -67,10 +68,10 @@ export function ProductCard({ product }: { product: IProduct }) {
   }
 
   return (
-    <div className="relative flex flex-col gap-2 bg-neutral-100 border-1 border-neutral-200 rounded-2xl p-4">
+    <div className="relative flex flex-col gap-2 bg-neutral-100 border-1 border-neutral-200 rounded-2xl p-4 dark:bg-gray-950 dark:border-slate-800">
       <button
         onClick={toggleFavorite}
-        className="absolute cursor-pointer top-3 right-3 bg-neutral-200 rounded-full p-1 flex"
+        className="absolute cursor-pointer top-3 right-3 bg-neutral-200 dark:bg-gray-800 rounded-full p-1 flex"
       >
         {isFavorite ? (
           <svg
@@ -123,9 +124,9 @@ export function ProductCard({ product }: { product: IProduct }) {
       <div className="flex items-center justify-between">
         <p className="font-bold">${product.price}</p>
         {cart.some((item) => item.product.id === product.id) ? (
-          <div className="flex items-center bg-neutral-200 rounded-full p-1 gap-2">
+          <div className="flex items-center bg-neutral-200 dark:bg-slate-800 rounded-full p-1 gap-2">
             <button
-              className="text-green-600 text-2xl bg-neutral-50 rounded-full w-6 h-6 flex items-center justify-center"
+              className="text-green-600 text-2xl bg-neutral-50 rounded-full w-6 h-6 flex items-center justify-center dark:bg-slate-600 dark:text-slate-50"
               onClick={handleDecrement}
             >
               -
@@ -187,5 +188,25 @@ export function ImageSlider({ imageUrls }: { imageUrls: string[] }) {
         ))}
       </div>
     </div>
+  );
+}
+
+export function ThemeSwitch() {
+  const [dark, setDark] = useState(false);
+  const h = document.getElementById("htmlTag");
+
+  function handleThemeSwitch() {
+    setDark(() => !dark);
+    if (h?.classList.contains("dark")) {
+      h?.classList.remove("dark");
+    } else {
+      h?.classList.add("dark");
+    }
+  }
+
+  return (
+    <button onClick={handleThemeSwitch}>
+      {dark ? <MoonStar /> : <SunMedium />}
+    </button>
   );
 }

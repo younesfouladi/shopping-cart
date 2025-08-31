@@ -146,10 +146,10 @@ export default function PorductDetails() {
     <>
       <div
         id="product-card"
-        className="fixed w-full h-full z-20 inset-0 bg-neutral-50 p-2 flex flex-col overflow-auto lg:grid lg:grid-cols-2 gap-x-4 lg:static"
+        className="fixed w-full h-full z-20 inset-0 bg-neutral-50 p-2 flex flex-col overflow-auto lg:grid lg:grid-cols-2 gap-x-4 lg:static dark:bg-gray-900"
         ref={productRef}
       >
-        <div className="flex flex-col gap-8 px-4 py-8 bg-neutral-200 rounded-4xl items-center">
+        <div className="flex flex-col gap-8 px-4 py-8 bg-neutral-200 rounded-4xl items-center dark:bg-slate-800">
           <div
             id="product-card-nav"
             className="w-full flex justify-between lg:hidden"
@@ -178,7 +178,7 @@ export default function PorductDetails() {
               </h3>
               <button
                 onClick={toggleFavorite}
-                className="cursor-pointer bg-neutral-200 rounded-full p-1 flex max-w-fit aspect-square ml-auto"
+                className="cursor-pointer bg-neutral-200 rounded-full p-1 flex max-w-fit aspect-square ml-auto dark:bg-slate-800"
               >
                 {isFavorite ? (
                   <svg
@@ -215,7 +215,7 @@ export default function PorductDetails() {
             </div>
             <h3 className="font-bold text-2xl">${selectedProduct.price}</h3>
 
-            <div className="flex items-center justify-center gap-1 border-1 border-neutral-200 bg-neutral-100 rounded-full max-w-fit py-1 px-2">
+            <div className="flex items-center justify-center gap-1 border-1 border-neutral-200 bg-neutral-100 rounded-full max-w-fit py-1 px-2 dark:bg-slate-800 dark:border-none">
               <p className="font-semibold">⭐ {selectedProduct.rating.rate}</p>
               <p className="text-sm">
                 ({selectedProduct.rating.count} Reviews)
@@ -228,25 +228,25 @@ export default function PorductDetails() {
               <li className="bg-green-600 border-1 border-neutral-400 rounded-full px-4 pt-2 text-neutral-50">
                 39
               </li>
-              <li className="border-1 border-neutral-400 rounded-full px-4 pt-2 text-neutral-600">
+              <li className="border-1 border-neutral-400 rounded-full px-4 pt-2 text-neutral-600 dark:text-slate-400">
                 40
               </li>
-              <li className="border-1 border-neutral-400 rounded-full px-4 pt-2 text-neutral-600">
+              <li className="border-1 border-neutral-400 rounded-full px-4 pt-2 text-neutral-600 dark:text-slate-400">
                 40
               </li>
-              <li className="border-1 border-neutral-400 rounded-full px-4 pt-2 text-neutral-600">
+              <li className="border-1 border-neutral-400 rounded-full px-4 pt-2 text-neutral-600 dark:text-slate-400">
                 42
               </li>
-              <li className="border-1 border-neutral-400 rounded-full px-4 pt-2 text-neutral-600">
+              <li className="border-1 border-neutral-400 rounded-full px-4 pt-2 text-neutral-600 dark:text-slate-400">
                 43
               </li>
             </ul>
           </div>
           <div className="w-full flex justify-center py-4">
             {cart.some((item) => item.product.id === Number(productId)) ? (
-              <div className="flex items-center bg-neutral-200 rounded-full p-1 gap-2">
+              <div className="flex items-center bg-neutral-200 rounded-full p-1 gap-2 dark:bg-slate-800">
                 <button
-                  className="text-green-600 text-2xl bg-neutral-50 rounded-full w-6 h-6 flex items-center justify-center"
+                  className="text-green-600 text-2xl bg-neutral-50 rounded-full w-6 h-6 flex items-center justify-center dark:bg-slate-600 dark:text-slate-50"
                   onClick={() => handleDecrement(selectedProduct)}
                 >
                   -
