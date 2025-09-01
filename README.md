@@ -1,168 +1,152 @@
-<div align="center">
-<img src="public/images/favicon.webp" alt="YOFI Logo" width="100"/>
-<h1>YOFI Shopping Cart</h1>
-<p>
-A modern, feature-rich e-commerce shopping cart application built with React, TypeScript, and Vite.
+<!-- Logo -->
+<p align="center">
+  <img src="public/images/favicon.webp" alt="Shopping Cart Logo" width="120" />
 </p>
-<p>
-<a href="https://www.google.com/search?q=https://github.com/younesfouladi/shopping-cart"><strong>Explore the docs »</strong></a>
-<br />
-<br />
-<a href="https://www.google.com/search?q=https://github.com/younesfouladi/shopping-cart/issues">Report Bug</a>
-·
-<a href="https://www.google.com/search?q=https://github.com/younesfouladi/shopping-cart/issues">Request Feature</a>
+
+<h1 align="center">🛒 Shopping Cart Project</h1>
+<p align="center">
+  A beautiful, modern shopping cart application built with <b>Vite</b> + <b>React</b> + <b>TypeScript</b>
 </p>
-</div>
-About The Project
 
-YOFI Shopping Cart is a responsive and stylish e-commerce frontend application. It provides a seamless user experience for browsing products, managing a shopping cart and wishlist, and checking out. The project is built with a modern tech stack, ensuring high performance and maintainability. It fetches product data from the Fake Store API.
-Key Features
+<p align="center">
+  <!-- Badges -->
+  <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React Badge"/>
+  <img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=FFD62E" alt="Vite Badge"/>
+  <img src="https://img.shields.io/badge/Tailwind%20CSS-0EA5E9?style=for-the-badge&logo=tailwindcss&logoColor=white" alt="Tailwind Badge" />
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript Badge"/>
+  <img src="https://img.shields.io/badge/GSAP-88CE02?style=for-the-badge&logo=greensock&logoColor=white" alt="GSAP Badge"/>
+  <img src="https://img.shields.io/badge/Framer%20Motion-EF4C5A?style=for-the-badge&logo=framer&logoColor=white" alt="Framer Motion Badge"/>
+  <img src="https://img.shields.io/badge/Vitest-6E9F18?style=for-the-badge&logo=vitest&logoColor=white" alt="Vitest Badge"/>
+  <img src="https://img.shields.io/badge/RTL-React%20Testing%20Library-E33332?style=for-the-badge&logo=testing-library&logoColor=white" alt="RTL Badge"/>
+  <img src="https://img.shields.io/badge/Jest%20DOM-15C213?style=for-the-badge&logo=jest&logoColor=white" alt="Jest DOM Badge"/>
+  <img src="https://img.shields.io/badge/Sonnet-2D8CFF?style=for-the-badge" alt="Sonnet Badge"/>
+</p>
 
-    Responsive Design: A beautiful UI that works on all devices, from mobile phones to desktops.
+---
 
-    Product Exploration: Users can view all products, see detailed product pages, and view items by category.
+## 📸 Screenshot
 
-    Wishlist: Add and remove favorite items to a personal wishlist.
+<p align="center">
+  <img src="public/images/screenshot.png" alt="Project Screenshot" width="600" />
+</p>
 
-    Shopping Cart: A fully functional cart to add, remove, and change the quantity of items.
+---
 
-    Real-time Search: Instantly search for products with a responsive search bar.
+## ✨ Features
 
-    Dark Mode: Switch between light and dark themes for a better viewing experience.
+- **Modern UI**: Responsive, beautiful design powered by Tailwind CSS.
+- **Smooth Animations**: Leveraging GSAP and Framer Motion for delightful interactions.
+- **State Management**: React hooks for state and cart logic.
+- **Testing**: Robust unit and integration tests with Vitest, React Testing Library, and Jest DOM.
+- **Performance**: Vite for lightning-fast development and builds.
+- **Type Safety**: Entire codebase in TypeScript.
+- **Extensible Architecture**: Easy to add products, payment options, etc.
 
-    Smooth Animations: Engaging animations and transitions using GSAP and Framer Motion.
+---
 
-    Notifications: Users receive feedback on actions like successful checkouts using sonner.
+## 🛠️ Technologies Used
 
-🛠️ Built With
+- **React** (frontend framework)
+- **Vite** (development build tool)
+- **TypeScript** (type safety)
+- **Tailwind CSS** (utility-first CSS)
+- **GSAP** & **Framer Motion** (animation libraries)
+- **Vitest** (testing framework)
+- **React Testing Library** & **Jest DOM** (component & DOM testing)
+- **Sonnet** (utility/tools, please specify more if needed)
 
-This project is built with a modern and powerful set of technologies.
-Core Technologies
+---
 
-    React - A JavaScript library for building user interfaces.
+## 🚀 Getting Started
 
-    TypeScript - A typed superset of JavaScript that compiles to plain JavaScript.
+### Prerequisites
 
-    Vite - A next-generation frontend tooling that is incredibly fast.
+- Node.js (v18+ recommended)
+- npm or yarn
 
-Styling & UI
+### Installation
 
-    Tailwind CSS - A utility-first CSS framework for rapid UI development.
+```bash
+# Clone the repo
+git clone https://github.com/younesfouladi/shopping-cart.git
+cd shopping-cart
 
-    Flowbite React - An open-source library of UI components built with Tailwind CSS and React.
+# Install dependencies
+npm install
+# or
+yarn install
+```
 
-    shadcn/ui (Tooltip) - Re-usable components built using Radix UI and Tailwind CSS.
+### Run the Project
 
-    Lucide React - A beautiful and consistent icon toolkit.
+```bash
+# Start development server
+npm run dev
+# or
+yarn dev
+```
 
-    GSAP (GreenSock Animation Platform) - A professional-grade animation library for the modern web.
+### Run Tests
 
-    Framer Motion - A production-ready motion library for React.
-
-    Sonner - An opinionated toast component for React.
-
-Routing & State Management
-
-    React Router - For declarative routing in React applications.
-
-    React Context API - For managing global state like products, cart, and wishlist.
-
-Development & Testing
-
-    Vitest - A blazing fast unit test framework powered by Vite.
-
-    React Testing Library - Simple and complete React DOM testing utilities that encourage good testing practices.
-
-    ESLint - For identifying and reporting on patterns found in ECMAScript/JavaScript code.
-
-    TypeScript ESLint - Tooling which enables ESLint to support TypeScript.
-
-🚀 Getting Started
-
-To get a local copy up and running, follow these simple steps.
-Prerequisites
-
-You need to have Node.js and npm (or yarn/pnpm) installed on your machine.
-
-    npm
-
-    npm install npm@latest -g
-
-Installation
-
-    Clone the repo
-
-    git clone [https://github.com/younesfouladi/shopping-cart.git](https://github.com/younesfouladi/shopping-cart.git)
-
-    Install NPM packages
-
-    npm install
-
-    Start the development server
-
-    npm run dev
-
-    Your application should now be running on http://localhost:5173/ (or another port if 5173 is busy).
-
-Running Tests
-
-To run the tests, use the following command:
-
+```bash
 npm run test
+# or
+yarn test
+```
 
-For a more interactive testing experience with a UI, you can run:
+---
 
-npm run test:ui
+## 📂 Project Structure
 
-📂 Project Structure
-
-The project follows a standard React application structure:
-
-/
-├── __tests__/         # Test files for components and logic
-├── public/             # Static assets like images and fonts
+```
+shopping-cart/
+├── public/
+│   └── images/
+│       ├── logo.png
+│       └── screenshot.png
 ├── src/
-│   ├── components/     # Reusable UI components
-│   │   ├── cart/
-│   │   ├── explorePage/
-│   │   ├── homePage/
-│   │   ├── navbar/
-│   │   ├── productDetails/
-│   │   └── ui/
-│   ├── context/        # React Context for state management
-│   ├── hooks/          # Custom React hooks
-│   ├── lib/            # Utility functions
-│   ├── routes/         # Routing configuration
-│   ├── styles/         # Global styles
-│   ├── types/          # TypeScript type definitions
-│   ├── App.tsx         # Main application component
-│   └── main.tsx        # Application entry point
-├── .eslintrc.js        # ESLint configuration
-├── package.json        # Project dependencies and scripts
-├── tsconfig.json       # TypeScript configuration
-└── vite.config.ts      # Vite configuration
+│   ├── components/
+│   ├── hooks/
+│   ├── pages/
+│   ├── styles/
+│   └── ...
+├── tests/
+├── package.json
+└── README.md
+```
 
-Contributing
+---
 
-Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are greatly appreciated.
+## 🧪 Testing
 
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+- All major components are covered with unit and integration tests.
+- Uses **Vitest** and **React Testing Library** for test coverage.
+- To run all tests:  
+  ```bash
+  npm run test
+  ```
 
-    Fork the Project
+---
 
-    Create your Feature Branch (git checkout -b feature/AmazingFeature)
+## 📈 Contribution
 
-    Commit your Changes (git commit -m 'Add some AmazingFeature')
+Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
 
-    Push to the Branch (git push origin feature/AmazingFeature)
+---
 
-    Open a Pull Request
+## 📄 License
 
-License
+This project is [MIT](LICENSE) licensed.
 
-Distributed under the MIT License. See LICENSE for more information.
-Contact
+---
 
-Younes Fouladi - younesfouladi.github.io - younes.fouladi@gmail.com
+## 💬 Contact
 
-Project Link: https://github.com/younesfouladi/shopping-cart
+- **Author**: [Younes Fouladi](https://github.com/younesfouladi)
+- **Email**: younesfouladi@gmail.com
+
+---
+
+<p align="center">
+  <b>Made with ❤️ using Vite + React!</b>
+</p>
