@@ -178,7 +178,7 @@ export default function PorductDetails() {
               </h3>
               <button
                 onClick={toggleFavorite}
-                className="cursor-pointer bg-neutral-200 rounded-full p-1 flex max-w-fit aspect-square ml-auto dark:bg-slate-800"
+                className="cursor-pointer bg-neutral-200 rounded-full p-1 flex w-fit ml-auto dark:bg-slate-800"
               >
                 {isFavorite ? (
                   <svg
