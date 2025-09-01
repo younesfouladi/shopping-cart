@@ -14,6 +14,8 @@
   <img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=FFD62E" alt="Vite Badge"/>
   <img src="https://img.shields.io/badge/Tailwind%20CSS-0EA5E9?style=for-the-badge&logo=tailwindcss&logoColor=white" alt="Tailwind Badge" />
   <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript Badge"/>
+  <img
+<img src="https://img.shields.io/badge/React--Router--dom-CA4245?style=for-the-badge&logo=react-router&logoColor=white" alt="React Router Badge"/>
   <img src="https://img.shields.io/badge/GSAP-88CE02?style=for-the-badge&logo=greensock&logoColor=white" alt="GSAP Badge"/>
   <img src="https://img.shields.io/badge/Framer%20Motion-EF4C5A?style=for-the-badge&logo=framer&logoColor=white" alt="Framer Motion Badge"/>
   <img src="https://img.shields.io/badge/Vitest-6E9F18?style=for-the-badge&logo=vitest&logoColor=white" alt="Vitest Badge"/>
