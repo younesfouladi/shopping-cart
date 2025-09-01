@@ -27,7 +27,7 @@
 ## 📸 Screenshot
 
 <p align="center">
-  <img src="public/images/screenshot.png" alt="Project Screenshot" width="600" />
+  <img src="public/images/sreenshot.png" alt="Project Screenshot" width="600" />
 </p>
 
 ---
