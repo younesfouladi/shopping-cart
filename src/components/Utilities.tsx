@@ -4,6 +4,7 @@ import type { IProduct } from "../types/product";
 import { Link } from "react-router-dom";
 import { useProductStore } from "../hooks/useProductContext";
 import { SunMedium, MoonStar } from "lucide-react";
+import React from "react";
 
 export function LoadingSpinner() {
   return (
@@ -77,6 +78,7 @@ export function ProductCard({ product }: { product: IProduct }) {
           src={product.image}
           alt="product's image"
           className="p-4 w-fit aspect-square object-contain"
+          loading="lazy"
         />
       </Link>
       <p
@@ -121,6 +123,15 @@ export function ProductCard({ product }: { product: IProduct }) {
 export function ImageSlider({ imageUrls }: { imageUrls: string[] }) {
   const [count, setCount] = useState(0);
 
+  const SliderImage = React.memo(({ src }: { src: string }) => (
+    <img
+      src={src}
+      alt="site banner"
+      className="rounded-xl w-full shrink-0 will-change-transform"
+      loading="lazy"
+    />
+  ));
+
   useEffect(() => {
     const timer = setInterval(() => {
       setCount((prev) => {
@@ -143,12 +154,7 @@ export function ImageSlider({ imageUrls }: { imageUrls: string[] }) {
         style={{ transform: `translateX(-${count * 100}%)` }}
       >
         {imageUrls.map((image, index) => (
-          <img
-            src={image}
-            alt="site banner"
-            className="rounded-xl w-full shrink-0"
-            key={index}
-          />
+          <SliderImage src={image} key={index} />
         ))}
       </div>
     </div>
