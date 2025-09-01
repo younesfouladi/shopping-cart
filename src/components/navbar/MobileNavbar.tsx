@@ -110,8 +110,8 @@ export default function MobileNavbar({
         >
           {searchResult.length > 0 &&
             searchResult.map((item) => (
-              <Link to={`/product/${item.id}`}>
-                <div key={item.id} className="flex w-full items-center gap-4">
+              <Link key={item.id} to={`/product/${item.id}`}>
+                <div className="flex w-full items-center gap-4">
                   <div className="max-w-1/5 bg-neutral-200 rounded-2xl p-2 dark:bg-slate-950">
                     <img src={item.image} alt="product image" />
                   </div>

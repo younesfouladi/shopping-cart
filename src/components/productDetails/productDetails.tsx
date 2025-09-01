@@ -244,7 +244,7 @@ export default function PorductDetails() {
           </div>
           <div className="w-full flex justify-center py-4">
             {cart.some((item) => item.product.id === Number(productId)) ? (
-              <div className="flex items-center bg-neutral-200 rounded-full p-1 gap-2 dark:bg-slate-800">
+              <div className="flex items-center bg-neutral-200 rounded-full p-1 gap-4 dark:bg-slate-800">
                 <button
                   className="text-green-600 text-2xl bg-neutral-50 rounded-full w-6 h-6 flex items-center justify-center dark:bg-slate-600 dark:text-slate-50"
                   onClick={() => handleDecrement(selectedProduct)}
