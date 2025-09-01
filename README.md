@@ -34,8 +34,7 @@
 ---
 
 ## ✨ Features
-
-- **Modern UI**: Responsive, beautiful design powered by Tailwind CSS.
+- **Fully Responsive/Dark Mode**: Responsive, beautiful design powered by Tailwind CSS with Dark Mode enabled.
 - **Smooth Animations**: Leveraging GSAP and Framer Motion for delightful interactions.
 - **State Management**: React hooks for state and cart logic.
 - **Testing**: Robust unit and integration tests with Vitest, React Testing Library, and Jest DOM.
