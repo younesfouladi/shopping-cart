@@ -1,7 +1,7 @@
 import { useProductContext } from "../../hooks/useProductContext";
 import { Link } from "react-router-dom";
 import { ChevronLeft, EllipsisVertical } from "lucide-react";
-import { useRef, useState, useLayoutEffect } from "react";
+import { useRef, useState, useLayoutEffect, useMemo } from "react";
 import gsap from "gsap";
 import type { ICart } from "../../types/product";
 import { Spinner } from "flowbite-react";
@@ -12,6 +12,10 @@ export default function Cart() {
   const cartRef = useRef(null);
   const deliveryFee: number = 15;
   const [isProcessing, setIsProcessing] = useState(false);
+
+  const totalPrice = useMemo(() => {
+    return cart.reduce((acc, item) => acc + item.product.price, 0);
+  }, [cart]);
 
   useLayoutEffect(() => {
     if (!cartRef.current) return;
@@ -155,12 +159,7 @@ export default function Cart() {
         <div className="border-b-1 border-neutral-400 border-dashed flex flex-col gap-1 pb-4">
           <div className="flex w-full justify-between">
             <h4 className="font-semibold">Sub Total</h4>
-            <p className="font-semibold">
-              $
-              {cart
-                .reduce((acc, item) => acc + item.product.price, 0)
-                .toFixed(2)}
-            </p>
+            <p className="font-semibold">${totalPrice}</p>
           </div>
           <div className="flex w-full justify-between">
             <h4 className="font-semibold">Delivery Fee</h4>
@@ -173,13 +172,7 @@ export default function Cart() {
         </div>
         <div className="flex w-full items-center justify-between">
           <h4 className="font-semibold">Total</h4>
-          <h3 className="font-bold text-xl">
-            $
-            {(
-              cart.reduce((acc, item) => acc + item.product.price, 0) +
-              deliveryFee
-            ).toFixed(2)}
-          </h3>
+          <h3 className="font-bold text-xl">${totalPrice + deliveryFee}</h3>
         </div>
         {!isProcessing ? (
           <button
