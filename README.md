@@ -49,10 +49,12 @@
 - **Vite** (development build tool)
 - **TypeScript** (type safety)
 - **Tailwind CSS** (utility-first CSS)
+- **React Router** (for pages Routing)
 - **GSAP** & **Framer Motion** (animation libraries)
 - **Vitest** (testing framework)
 - **React Testing Library** & **Jest DOM** (component & DOM testing)
-- **Sonnet** (utility/tools, please specify more if needed)
+- **Lucid React** (For Icons)
+- **flowbite-React/shadcn/sonner** (For ui componnents)
 
 ---
 
@@ -119,6 +121,7 @@ shopping-cart/
 ## 🧪 Testing
 
 - All major components are covered with unit and integration tests.
+- Real Tests will be updated & Fixed Sooooon...
 - Uses **Vitest** and **React Testing Library** for test coverage.
 - To run all tests:
   ```bash
