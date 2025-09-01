@@ -19,7 +19,6 @@
   <img src="https://img.shields.io/badge/Vitest-6E9F18?style=for-the-badge&logo=vitest&logoColor=white" alt="Vitest Badge"/>
   <img src="https://img.shields.io/badge/RTL-React%20Testing%20Library-E33332?style=for-the-badge&logo=testing-library&logoColor=white" alt="RTL Badge"/>
   <img src="https://img.shields.io/badge/Jest%20DOM-15C213?style=for-the-badge&logo=jest&logoColor=white" alt="Jest DOM Badge"/>
-  <img src="https://img.shields.io/badge/Sonnet-2D8CFF?style=for-the-badge" alt="Sonnet Badge"/>
 </p>
 
 ---
@@ -121,7 +120,7 @@ shopping-cart/
 
 - All major components are covered with unit and integration tests.
 - Uses **Vitest** and **React Testing Library** for test coverage.
-- To run all tests:  
+- To run all tests:
   ```bash
   npm run test
   ```
