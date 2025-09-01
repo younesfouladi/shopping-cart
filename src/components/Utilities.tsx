@@ -2,7 +2,7 @@ import { Spinner } from "flowbite-react";
 import { useEffect, useState } from "react";
 import type { IProduct } from "../types/product";
 import { Link } from "react-router-dom";
-import { useProductContext } from "../hooks/useProductContext";
+import { useProductStore } from "../hooks/useProductContext";
 import { SunMedium, MoonStar } from "lucide-react";
 
 export function LoadingSpinner() {
@@ -14,18 +14,13 @@ export function LoadingSpinner() {
 }
 
 export function ProductCard({ product }: { product: IProduct }) {
-  const { wishList, setWishList, cart, setCart } = useProductContext();
+  const cart = useProductStore((state) => state.cart);
+  const wishList = useProductStore((state) => state.wishList);
+  const toggleFavorite = useProductStore((state) => state.setWishList);
+  const handleAddToCart = useProductStore((state) => state.handleAddToCart);
+  const handleIncrement = useProductStore((state) => state.handleIncrement);
+  const handleDecrement = useProductStore((state) => state.handleDecrement);
   const isFavorite = wishList?.some((item) => item.id === product.id) || false;
-
-  const toggleFavorite = () => {
-    setWishList((prev) => {
-      if (isFavorite) {
-        return prev.filter((item) => item.id !== product.id);
-      } else {
-        return [...prev, product];
-      }
-    });
-  };
 
   function handleOpenLinkNewTab(
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
@@ -36,41 +31,10 @@ export function ProductCard({ product }: { product: IProduct }) {
     }
   }
 
-  function handleAddToCart() {
-    setCart((prev) => [...prev, { quanity: 1, product: product }]);
-  }
-
-  function handleInrement() {
-    setCart((prev) =>
-      prev.map((item) =>
-        item.product.id === product.id
-          ? { ...item, quanity: item.quanity + 1 }
-          : item
-      )
-    );
-  }
-
-  function handleDecrement() {
-    const pr = cart.find((item) => item.product.id === product.id);
-    if (pr?.quanity === 1) {
-      setCart((prev) =>
-        prev.filter((item) => item.product.id !== pr.product.id)
-      );
-    } else {
-      setCart((prev) =>
-        prev.map((item) =>
-          item.product.id === product.id
-            ? { ...item, quanity: item.quanity - 1 }
-            : item
-        )
-      );
-    }
-  }
-
   return (
     <div className="relative flex flex-col gap-2 bg-neutral-100 border-1 border-neutral-200 rounded-2xl p-4 dark:bg-gray-950 dark:border-slate-800">
       <button
-        onClick={toggleFavorite}
+        onClick={() => toggleFavorite(product)}
         className="absolute cursor-pointer top-3 right-3 bg-neutral-200 dark:bg-gray-800 rounded-full p-1 flex"
       >
         {isFavorite ? (
@@ -127,7 +91,7 @@ export function ProductCard({ product }: { product: IProduct }) {
           <div className="flex items-center bg-neutral-200 dark:bg-slate-800 rounded-full p-1 gap-2">
             <button
               className="text-green-600 text-2xl bg-neutral-50 rounded-full w-6 h-6 flex items-center justify-center dark:bg-slate-600 dark:text-slate-50"
-              onClick={handleDecrement}
+              onClick={() => handleDecrement(product)}
             >
               -
             </button>
@@ -136,7 +100,7 @@ export function ProductCard({ product }: { product: IProduct }) {
             </p>
             <button
               className="text-neutral-50 text-2xl bg-green-600 rounded-full w-6 h-6 flex items-center justify-center"
-              onClick={handleInrement}
+              onClick={() => handleIncrement(product)}
             >
               +
             </button>
@@ -144,7 +108,7 @@ export function ProductCard({ product }: { product: IProduct }) {
         ) : (
           <button
             className="gap-1 bg-green-700 text-neutral-50 px-4 py-1 rounded-lg"
-            onClick={handleAddToCart}
+            onClick={() => handleAddToCart(product)}
           >
             Add
           </button>

@@ -1,10 +1,10 @@
 import { ProductCard } from "../Utilities";
 import { LoadingSpinner } from "../Utilities";
-import { useProductContext } from "../../hooks/useProductContext";
+import { useProductStore } from "../../hooks/useProductContext";
 
 export default function WishList() {
-  const { products, wishList } = useProductContext();
-
+  const products = useProductStore((state) => state.products);
+  const wishList = useProductStore((state) => state.wishList);
   if (products.length === 0) {
     return <LoadingSpinner />;
   }

@@ -1,5 +1,3 @@
-import type React from "react";
-
 export interface IProduct {
   id: number;
   title: string;
@@ -18,11 +16,14 @@ export interface ICart {
   product: IProduct;
 }
 
-export interface ProductContextType {
+export interface ProductStoreType {
   products: IProduct[];
-  setProducts: React.Dispatch<React.SetStateAction<IProduct[]>>;
+  setProducts: (items: IProduct[]) => void;
   wishList: IProduct[];
-  setWishList: React.Dispatch<React.SetStateAction<IProduct[]>>;
+  setWishList: (product: IProduct) => void;
   cart: ICart[];
-  setCart: React.Dispatch<React.SetStateAction<ICart[]>>;
+  setCart: (item: []) => void;
+  handleAddToCart: (product: IProduct) => void;
+  handleIncrement: (product: IProduct) => void;
+  handleDecrement: (product: IProduct) => void;
 }

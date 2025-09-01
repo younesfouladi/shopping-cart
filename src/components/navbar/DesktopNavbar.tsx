@@ -2,7 +2,7 @@ import { Link, NavLink } from "react-router-dom";
 import { ShoppingBag, Search, X } from "lucide-react";
 import { gsap } from "gsap";
 import { useEffect, useRef, useState, type ChangeEvent } from "react";
-import { useProductContext } from "../../hooks/useProductContext";
+import { useProductStore } from "../../hooks/useProductContext";
 import type { INavbarSearch } from "./navbar";
 import {
   Tooltip,
@@ -17,7 +17,8 @@ export default function DesktopNavbar({
   setSearchValue,
   setSearchResult,
 }: INavbarSearch) {
-  const { cart, products } = useProductContext();
+  const cart = useProductStore((state) => state.cart);
+  const products = useProductStore((state) => state.products);
   const categories = [...new Set(products.map((item) => item.category))];
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {

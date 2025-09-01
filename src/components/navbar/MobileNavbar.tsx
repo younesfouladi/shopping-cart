@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 import React, { useState, useEffect, useRef, type ChangeEvent } from "react";
 import { gsap } from "gsap";
-import { useProductContext } from "../../hooks/useProductContext";
+import { useProductStore } from "../../hooks/useProductContext";
 import { motion, AnimatePresence } from "motion/react";
 import type { INavbarSearch } from "./navbar";
 import {
@@ -26,7 +26,7 @@ export default function MobileNavbar({
   setSearchValue,
   setSearchResult,
 }: INavbarSearch) {
-  const { products } = useProductContext();
+  const products = useProductStore((state) => state.products);
   const categories = [...new Set(products.map((item) => item.category))];
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
@@ -192,7 +192,7 @@ const FlyoutMenu = ({ icon, categories }: IFlyoutMent) => {
 };
 
 export function AnimatedNav() {
-  const { cart } = useProductContext();
+  const cart = useProductStore((state) => state.cart);
 
   const items = [
     { to: "/", label: "Home", Icon: Store },

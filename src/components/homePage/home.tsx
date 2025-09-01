@@ -1,9 +1,9 @@
 import { ImageSlider, LoadingSpinner } from "../Utilities";
 import { ProductCard } from "../Utilities";
-import { useProductContext } from "../../hooks/useProductContext";
+import { useProductStore } from "@/hooks/useProductContext";
 
 export default function HomePage() {
-  const { products } = useProductContext();
+  const products = useProductStore((state) => state.products);
   if (products.length === 0) {
     return <LoadingSpinner />;
   }

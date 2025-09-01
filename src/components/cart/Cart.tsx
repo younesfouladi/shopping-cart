@@ -1,14 +1,16 @@
-import { useProductContext } from "../../hooks/useProductContext";
+import { useProductStore } from "../../hooks/useProductContext";
 import { Link } from "react-router-dom";
 import { ChevronLeft, EllipsisVertical } from "lucide-react";
 import { useRef, useState, useLayoutEffect, useMemo } from "react";
 import gsap from "gsap";
-import type { ICart } from "../../types/product";
 import { Spinner } from "flowbite-react";
 import { Toaster, toast } from "sonner";
 
 export default function Cart() {
-  const { cart, setCart } = useProductContext();
+  const cart = useProductStore((state) => state.cart);
+  const handleIncrement = useProductStore((state) => state.handleIncrement);
+  const handleDecrement = useProductStore((state) => state.handleDecrement);
+  const setCart = useProductStore((state) => state.setCart);
   const cartRef = useRef(null);
   const deliveryFee: number = 15;
   const [isProcessing, setIsProcessing] = useState(false);
@@ -29,34 +31,6 @@ export default function Cart() {
       { scale: 0, opacity: 0, duration: 0.5, onComplete: () => history.back() }
     );
   };
-
-  function handleInrement(pr: ICart) {
-    const product = pr.product;
-    setCart((prev) =>
-      prev.map((item) =>
-        item.product.id === product.id
-          ? { ...item, quanity: item.quanity + 1 }
-          : item
-      )
-    );
-  }
-
-  function handleDecrement(pr: ICart) {
-    const product = pr.product;
-    if (pr?.quanity === 1) {
-      setCart((prev) =>
-        prev.filter((item) => item.product.id !== pr.product.id)
-      );
-    } else {
-      setCart((prev) =>
-        prev.map((item) =>
-          item.product.id === product.id
-            ? { ...item, quanity: item.quanity - 1 }
-            : item
-        )
-      );
-    }
-  }
 
   function handleCheckout() {
     const myPromise = new Promise<{ name: string }>((resolve) => {
@@ -138,14 +112,14 @@ export default function Cart() {
                 <div className="flex items-center bg-neutral-200 rounded-full p-1 gap-4 dark:bg-slate-800">
                   <button
                     className="text-green-600 text-3xl bg-neutral-50 rounded-full w-7 h-7 flex items-center justify-center dark:bg-slate-600 dark:text-slate-50"
-                    onClick={() => handleDecrement(item)}
+                    onClick={() => handleDecrement(item.product)}
                   >
                     -
                   </button>
                   <p className="font-bold text-lg">{item.quanity}</p>
                   <button
                     className="text-neutral-50 text-3xl bg-green-600 rounded-full w-7 h-7 flex items-center justify-center"
-                    onClick={() => handleInrement(item)}
+                    onClick={() => handleIncrement(item.product)}
                   >
                     +
                   </button>

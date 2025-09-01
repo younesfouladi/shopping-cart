@@ -1,15 +1,11 @@
 import "./styles/App.css";
 import Navbar from "./components/navbar/navbar";
 import { Outlet } from "react-router-dom";
-import { ProductContext } from "./context/ProductContext";
-import { useEffect, useState } from "react";
-import type { IProduct } from "./types/product";
-import type { ICart } from "./types/product";
+import { useProductStore } from "./hooks/useProductContext";
+import { useEffect } from "react";
 
 export default function App() {
-  const [products, setProducts] = useState<IProduct[]>([]);
-  const [wishList, setWishList] = useState<IProduct[]>([]);
-  const [cart, setCart] = useState<ICart[]>([]);
+  const setProducts = useProductStore((state) => state?.setProducts);
 
   useEffect(() => {
     (async () => {
@@ -22,19 +18,15 @@ export default function App() {
         throw new Error(`Error : ${error}`);
       }
     })();
-  }, []);
+  }, [setProducts]);
 
   return (
     <main
       id="container"
       className="p-4 font-main min-h-full bg-[#fafafa] dark:bg-gray-900"
     >
-      <ProductContext.Provider
-        value={{ products, setProducts, wishList, setWishList, cart, setCart }}
-      >
-        <Navbar />
-        <Outlet />
-      </ProductContext.Provider>
+      <Navbar />
+      <Outlet />
     </main>
   );
 }

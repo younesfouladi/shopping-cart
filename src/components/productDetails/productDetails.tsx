@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { ChevronLeft, EllipsisVertical } from "lucide-react";
 import { useParams } from "react-router-dom";
-import { useProductContext } from "../../hooks/useProductContext";
+import { useProductStore } from "../../hooks/useProductContext";
 import { useRef, useEffect, useState, useLayoutEffect } from "react";
 import type { IProduct } from "../../types/product";
 import gsap from "gsap";
@@ -10,8 +10,13 @@ import { ProductCard } from "../Utilities";
 export default function PorductDetails() {
   const productRef = useRef(null);
   const { productId } = useParams();
-  const { products, wishList, setWishList, cart, setCart } =
-    useProductContext();
+  const products = useProductStore((state) => state.products);
+  const wishList = useProductStore((state) => state.wishList);
+  const cart = useProductStore((state) => state.cart);
+  const setWishList = useProductStore((state) => state.setWishList);
+  const handleAddToCart = useProductStore((state) => state.handleAddToCart);
+  const handleIncrement = useProductStore((state) => state.handleIncrement);
+  const handleDecrement = useProductStore((state) => state.handleDecrement);
   const [selectedProduct, setSelectedProduct] = useState<IProduct | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -75,46 +80,8 @@ export default function PorductDetails() {
 
   const toggleFavorite = () => {
     if (!selectedProduct) return;
-
-    setWishList((prev) => {
-      if (isFavorite) {
-        return prev.filter((item) => item.id !== selectedProduct.id);
-      } else {
-        return [...prev, selectedProduct];
-      }
-    });
+    setWishList(selectedProduct);
   };
-
-  function handleAddToCart(product: IProduct) {
-    setCart((prev) => [...prev, { quanity: 1, product: product }]);
-  }
-
-  function handleInrement(product: IProduct) {
-    setCart((prev) =>
-      prev.map((item) =>
-        item.product.id === product.id
-          ? { ...item, quanity: item.quanity + 1 }
-          : item
-      )
-    );
-  }
-
-  function handleDecrement(product: IProduct) {
-    const pr = cart.find((item) => item.product.id === product.id);
-    if (pr?.quanity === 1) {
-      setCart((prev) =>
-        prev.filter((item) => item.product.id !== pr.product.id)
-      );
-    } else {
-      setCart((prev) =>
-        prev.map((item) =>
-          item.product.id === product.id
-            ? { ...item, quanity: item.quanity - 1 }
-            : item
-        )
-      );
-    }
-  }
 
   if (loading) {
     return (
@@ -259,7 +226,7 @@ export default function PorductDetails() {
                 </p>
                 <button
                   className="text-neutral-50 text-2xl bg-green-600 rounded-full w-6 h-6 flex items-center justify-center"
-                  onClick={() => handleInrement(selectedProduct)}
+                  onClick={() => handleIncrement(selectedProduct)}
                 >
                   +
                 </button>
